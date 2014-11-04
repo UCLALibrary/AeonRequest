@@ -1,0 +1,311 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<%@ page contentType="text/html;charset=windows-1252"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<jsp:useBean id="bibSource"
+             class="edu.ucla.library.libservices.aeon.vger.generators.VgerBibDataGenerator">
+  <jsp:setProperty name="bibSource" property="bibID" param="bibID"/>
+  <jsp:setProperty name="bibSource" property="dbName" value='<%= application.getInitParameter("datasource.vger") %>'/>
+</jsp:useBean>
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+    <link href="http://www.library.ucla.edu/css/wht.css" rel="stylesheet" type="text/css">
+    <title>Library Special Collections</title>
+    <script type="text/javascript">
+    <!--
+        function toggle_visibility(id, doSwitch) {
+           var e = document.getElementById(id);
+           if(doSwitch == 2)
+              e.style.display = 'block';
+           else
+              e.style.display = 'none';
+        }
+    //-->
+    </script>
+  </head>
+  <body bgcolor="#FFFFFF" topmargin="0" marginheight="0" marginwidth="0" leftmargin="0" width="960">
+    <table width="960" cellpadding="0" cellspacing="0" align="center">
+      <tr>
+        <td width="165" bgcolor="#536895" align="center">
+          <img src="http://www.library.ucla.edu/images/logo_blu_nobar.gif">
+        </td>
+        <td bgcolor="#536895" align="center">
+          <font color="#ffffff" class="body"><b>Library Special Collections</b></font>
+        </td>
+        <td  width="155" bgcolor="#536895">
+        </td>
+      </tr>
+    </table>
+    <table align="center" width="960" border="1" class="footer">
+      <tr>
+        <td>
+          Welcome to UCLA Library Special Collections.  Thank you for your 
+          interest in our holdings.  Below are the details of the material you 
+          are considering including which location you will go to view the 
+          material.  There are two possible locations: Biomed and YRL.  All of 
+          our material is non-circulating and cannot be transferred between the 
+          Reading Rooms.<br/>
+          You may select as many items as you like, but be aware there is a 
+          daily limit of 5 items per researcher for material retrieved from 
+          off-site storage.<br/>
+          If you would like to see the material in a particular order, please 
+          indicate so in the “Notes” area.<br/>
+          Please review your selections before clicking the “Submit Request” 
+          button and note the location listed.
+        </td>
+      </tr>
+    </table>
+    <br/>
+    <c:set var="bibRecord" value="${bibSource.bibData}"/>
+    <form action="submit.jsp" method="POST">
+      <input type="hidden" name="bibID" value="${param.bibID}"/>
+      <table align="center" width="960" border="0" cellpadding="3">
+        <tr>
+          <td>Author</td>
+          <td>${bibRecord.author}</td>
+        </tr>
+        <tr>
+          <td>Title</td>
+          <td>${bibRecord.title}</td>
+        </tr>
+        <tr>
+          <td>Published</td>
+          <td>${bibRecord.pubDates}</td>
+        </tr>
+        <c:if test="${not empty bibRecord.marc246}">
+          <tr>
+            <td>Collection Title</td>
+            <td>${bibRecord.marc246}</td>
+          </tr>
+        </c:if>
+        <c:if test="${not empty bibRecord.marc506}">
+          <tr>
+            <td>Restrictions on Access</td>
+            <td>${bibRecord.marc506}</td>
+          </tr>
+        </c:if>
+        <c:if test="${not empty bibRecord.marc524}">
+          <tr>
+            <td>Preferred Citation</td>
+            <td>${bibRecord.marc524}</td>
+          </tr>
+        </c:if>
+        <c:if test="${not empty bibRecord.marc590}">
+          <tr>
+            <td>Local Note</td>
+            <td>${bibRecord.marc590}</td>
+          </tr>
+        </c:if>
+        <tr>
+          <td>Call Number(s)</td>
+          <td>
+            <ul>
+              <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
+                <li>${yrl.callNo}</li>
+              </c:forEach>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Special Requests/Questions?<br/>
+            Please enter any special requests or questions you have for library staff.
+          </td>
+          <td>
+            <textarea cols="50" rows="5" name="specReq">
+            </textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            My Notes:<br/>
+            enter any notes about this request for your personal reference.
+          </td>
+          <td>
+            <textarea cols="50" rows="5" name="notes">
+            </textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>Is this request for:</td>
+          <td>
+            <input type="radio" name="reqType" value="1" checked="checked" onclick="toggle_visibility('dupe',1);">On-site review<br/>
+            <input type="radio" name="reqType" value="2" onclick="toggle_visibility('dupe',2);">Duplication
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div id="dupe" style="display: none;">
+              <table>
+                <tr>
+                  <td>
+                    Format:&nbsp;
+                    <select name="format">
+                      <option value="AV">Audio/video</option>
+                      <option value="PDF">PDF</option>
+                      <option value="TIFF">TIFF</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" value="publish">For Publication?
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Project Discription<br/>
+                    <textarea cols="50" rows="5" name="projDescript"></textarea>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+
+        <jsp:useBean id="dateGetter"
+                     class="edu.ucla.library.libservices.aeon.vger.utility.AvailableDates">
+          <c:choose>
+            <c:when test="${bibSource.isBio}">
+              <jsp:setProperty name="dateGetter" property="unitID" value='<%= application.getInitParameter("unitid.biohis") %>'/>
+            </c:when>
+            <c:otherwise>
+              <jsp:setProperty name="dateGetter" property="unitID" value='<%= application.getInitParameter("unitid.yrlspc") %>'/>
+            </c:otherwise>
+          </c:choose>
+          <jsp:setProperty name="dateGetter" property="dbName" value='<%= application.getInitParameter("datasource.hours") %>'/>
+        </jsp:useBean>
+        
+        <c:set var="openDates" value="${dateGetter.availables}"/>
+        <tr>
+          <td colspan="2">
+              <table>
+                <tr>
+                  <th colspan="3">
+                    Select date of visit.<br/>
+                    If material is stored off-site, please allow at least 3 days for retrieval.
+                  </th>
+                </tr>
+                <tr>
+                  <td>Select a listed date</td>
+                  <td>OR</td>
+                  <td>Enter a preferred date</td>
+                </tr>
+                <tr>
+                  <td>
+                    <c:forEach var="theDate" items="${openDates}" begin="0" end="6">
+                      <input type="radio" name="theDate" value="${theDate}"/>&nbsp;${theDate}<br/>
+                    </c:forEach>
+                  </td>
+                  <td>
+                    <c:forEach var="theDate" items="${openDates}" begin="7" end="13">
+                      <input type="radio" name="theDate" value="${theDate}"/>&nbsp;${theDate}<br/>
+                    </c:forEach>
+                  </td>
+                  <td>
+                    <input name="textDate" value=""/>
+                  </td>
+                </tr>
+              </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="submit" value="Submit Request"/>
+          </td>
+        </tr>
+      </table>
+      <br/>
+      <c:choose>
+        <c:when test="${not empty bibRecord.srlfItems}">
+          <table align="center" width="960" border="1" class="footer">
+            <tr>
+              <th width="25%">Request</th>
+              <th width="75%">Item Description</th>
+            </tr>
+            <c:forEach var="srlf" items="${bibRecord.srlfItems}">
+              <tr>
+                <td width="25%" align="center">
+                  <input type="checkbox" name="itemID" value="${srlf.itemID}"/>
+                  <c:if test="${(not empty srlf.statusID) and (srlf.statusID ne 1)}">
+                    <br/>
+                    (${srlf.status}; There may be a delay in retrieval)
+                  </c:if>
+                </td>
+                <td width="75%">
+                  <c:if test="${not empty srlf.itemEnum}">
+                    ${srlf.itemEnum}&nbsp;|&nbsp;
+                  </c:if>
+                  <c:if test="${not empty srlf.chron}">
+                    ${srlf.chron}&nbsp;|&nbsp;
+                  </c:if>
+                  <c:if test="${(not empty srlf.copy) and (srlf.copy ne 0)}">
+                    Copy&nbsp;${srlf.copy}&nbsp;|&nbsp;
+                  </c:if>
+                  <c:if test="${not empty srlf.note}">
+                    ${srlf.note}&nbsp;|&nbsp;
+                  </c:if>
+                  <c:if test="${not empty srlf.oacDetails}">
+                    <br/>
+                    ${srlf.oacDetails}
+                  </c:if>
+                  <c:if test="${not empty srlf.pickupLocale}">
+                    <br/>
+                    ${srlf.pickupLocale}
+                  </c:if>
+                </td>
+              </tr>
+            </c:forEach>
+            <tr>
+              <td colspan="2">
+                <input type="submit" value="Submit Request"/>
+              </td>
+            </tr>
+          </table>
+        </c:when>
+        <c:otherwise>
+          <table align="center" width="960" border="0" class="footer">
+            <tr>
+              <td>
+                <input type="submit" value="Submit Request"/>
+              </td>
+            </tr>
+          </table>
+        </c:otherwise>
+      </c:choose>
+      <br/>
+    </form>
+  </body>
+</html>
+    <!--h3>Viewing bib and holdings for ${param.bibID}</h3-->
+    <!--ul>
+      <li>title:&nbsp;${bibRecord.title}</li>
+      <li>marc246 label:&nbsp;${bibRecord.marc246}</li>
+      <li>pub dates:&nbsp;${bibRecord.pubDates}</li>
+      <li>marc506 label:&nbsp;${bibRecord.marc506}</li>
+      <li>author:&nbsp;${bibRecord.author}</li>
+      <li>marc524 label:&nbsp;${bibRecord.marc524}</li>
+      <li>marc590 label:&nbsp;${bibRecord.marc590}</li>
+    </ul>
+    <h3>YRL Holdings</h3>
+    <ul>
+      <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
+        <li>${yrl.callNo}</li>
+      </c:forEach>
+    </ul>
+    <h3>SRLF Holdings</h3>
+    <ul>
+      <c:forEach var="srlf" items="${bibRecord.srlfItems}">
+        <li>
+          <ul>
+            <li>Item enumeration:&nbsp;${srlf.itemEnum}</li>
+            <li>Chron:&nbsp;${srlf.chron}</li>
+            <li>Copy:&nbsp;${srlf.copy}</li>
+            <li>Barcode:&nbsp;${srlf.barcode}</li>
+          </ul>
+        </li>
+      </c:forEach>
+    </ul-->

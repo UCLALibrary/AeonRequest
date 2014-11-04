@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5" xmlns="http://java.sun.com/xml/ns/javaee">
+  <context-param>
+    <param-name>datasource.vger</param-name>
+    <param-value>java:/rssDS</param-value>
+  </context-param>
+  <context-param>
+    <param-name>datasource.hours</param-name>
+    <param-value>java:/scheduleDS</param-value>
+  </context-param>
+  <context-param>
+    <param-name>unitid.biohis</param-name>
+    <param-value>4</param-value>
+  </context-param>
+  <context-param>
+    <param-name>unitid.yrlspc</param-name>
+    <param-value>23</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>FileSubmitServlet</servlet-name>
+    <servlet-class>edu.ucla.library.libservices.aeon.submission.web.FileSubmitServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileSubmitServlet</servlet-name>
+    <url-pattern>/filesubmit</url-pattern>
+  </servlet-mapping>
+</web-app>
