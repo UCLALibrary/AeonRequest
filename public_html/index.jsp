@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page contentType="text/html;charset=windows-1252"%>
+<%@ page contentType="text/html;charset=UTF-8" errorPage="errors.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:useBean id="bibSource"
@@ -14,29 +14,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <link href="http://www.library.ucla.edu/css/wht.css" rel="stylesheet" type="text/css">
     <title>Library Special Collections</title>
-    <script type="text/javascript">
-    <!--
-        function toggle_visibility(id, doSwitch) {
-           var e = document.getElementById(id);
-           if(doSwitch == 2)
-              e.style.display = 'block';
-           else
-              e.style.display = 'none';
-        }
-    //-->
-    </script>
   </head>
   <body bgcolor="#FFFFFF" topmargin="0" marginheight="0" marginwidth="0" leftmargin="0" width="960">
     <table width="960" cellpadding="0" cellspacing="0" align="center">
       <tr>
-        <td width="165" bgcolor="#536895" align="center">
-          <img src="http://www.library.ucla.edu/images/logo_blu_nobar.gif">
+        <td width="165" bgcolor="#3283BE" align="center">
+          <img src="http://www.library.ucla.edu/sites/all/themes/uclalib_omega/logo.png">
         </td>
-        <td bgcolor="#536895" align="center">
-          <font color="#ffffff" class="body"><b>Library Special Collections</b></font>
+        <td bgcolor="#3283BE" align="center">
+          <font color="#666" class="body"><b>Library Special Collections</b></font><br/>
         </td>
-        <td  width="155" bgcolor="#536895">
+        <td  width="155" bgcolor="#3283BE">
         </td>
+      </tr>
       </tr>
     </table>
     <table align="center" width="960" border="1" class="footer">
@@ -52,8 +42,8 @@
           daily limit of 5 items per researcher for material retrieved from 
           off-site storage.<br/>
           If you would like to see the material in a particular order, please 
-          indicate so in the “Notes” area.<br/>
-          Please review your selections before clicking the “Submit Request” 
+          indicate so in the â€œNotesâ€ area.<br/>
+          Please review your selections before clicking the â€œSubmit Requestâ€ 
           button and note the location listed.
         </td>
       </tr>
@@ -64,6 +54,10 @@
       <input type="hidden" name="bibID" value="${param.bibID}"/>
       <table align="center" width="960" border="0" cellpadding="3">
         <tr>
+          <td>Record ID</td>
+          <td>${param.bibID}</td>
+        </tr>
+        <tr>
           <td>Author</td>
           <td>${bibRecord.author}</td>
         </tr>
@@ -72,7 +66,7 @@
           <td>${bibRecord.title}</td>
         </tr>
         <tr>
-          <td>Published</td>
+          <td>Dates</td>
           <td>${bibRecord.pubDates}</td>
         </tr>
         <c:if test="${not empty bibRecord.marc246}">
@@ -104,7 +98,11 @@
           <td>
             <ul>
               <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
-                <li>${yrl.callNo}</li>
+                <li style="list-style-type: none;">
+                  <c:if test="${not empty yrl.callNo}">
+                    ${yrl.callNo}
+                  </c:if>
+                </li>
               </c:forEach>
             </ul>
           </td>
@@ -129,44 +127,7 @@
             </textarea>
           </td>
         </tr>
-        <tr>
-          <td>Is this request for:</td>
-          <td>
-            <input type="radio" name="reqType" value="1" checked="checked" onclick="toggle_visibility('dupe',1);">On-site review<br/>
-            <input type="radio" name="reqType" value="2" onclick="toggle_visibility('dupe',2);">Duplication
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <div id="dupe" style="display: none;">
-              <table>
-                <tr>
-                  <td>
-                    Format:&nbsp;
-                    <select name="format">
-                      <option value="AV">Audio/video</option>
-                      <option value="PDF">PDF</option>
-                      <option value="TIFF">TIFF</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="checkbox" value="publish">For Publication?
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Project Discription<br/>
-                    <textarea cols="50" rows="5" name="projDescript"></textarea>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </td>
-        </tr>
-
-        <jsp:useBean id="dateGetter"
+        <%--jsp:useBean id="dateGetter"
                      class="edu.ucla.library.libservices.aeon.vger.utility.AvailableDates">
           <c:choose>
             <c:when test="${bibSource.isBio}">
@@ -211,7 +172,7 @@
                 </tr>
               </table>
           </td>
-        </tr>
+        </tr--%>
         <tr>
           <td colspan="2">
             <input type="submit" value="Submit Request"/>
@@ -230,10 +191,10 @@
               <tr>
                 <td width="25%" align="center">
                   <input type="checkbox" name="itemID" value="${srlf.itemID}"/>
-                  <c:if test="${(not empty srlf.statusID) and (srlf.statusID ne 1)}">
+                  <%--c:if test="${(not empty srlf.statusID) and (srlf.statusID ne 1)}">
                     <br/>
                     (${srlf.status}; There may be a delay in retrieval)
-                  </c:if>
+                  </c:if--%>
                 </td>
                 <td width="75%">
                   <c:if test="${not empty srlf.itemEnum}">

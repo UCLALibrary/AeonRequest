@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class SubmitBibGenerator
   extends BaseGenerator
 {
+  private boolean isBio;
   private VgerBibData bibData;
   private String[] itemIDs;
 
@@ -42,6 +43,17 @@ public class SubmitBibGenerator
     itemGen.setBibID( getBibID() );
     itemGen.setItemIDs( getItemIDs() );
     bibData.setSrlfItems( itemGen.getSimpleItems() );
+    if ( bibData.getSrlfItems() != null && bibData.getSrlfItems().size() > 0 )
+    {
+      if ( bibData.getSrlfItems().get( 0 ).getLocation().contains( "Biomedical" ) )
+        isBio = true;
+      else
+        isBio = false;
+    }
+    else
+    {
+      isBio = false;
+    }
 
     return bibData;
   }
@@ -54,5 +66,10 @@ public class SubmitBibGenerator
   private String[] getItemIDs()
   {
     return itemIDs;
+  }
+
+  public boolean isIsBio()
+  {
+    return isBio;
   }
 }
