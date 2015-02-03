@@ -36,9 +36,13 @@ public class DataSourceFactory
   public static DriverManagerDataSource createHoursSource()
   {
     DriverManagerDataSource ds;
-
-    //code here for setting connection; hidden in repo version
-
+    
+    ds  = new DriverManagerDataSource();
+    ds.setDriverClassName( "com.microsoft.sqlserver.jdbc.SQLServerDriver" );
+    ds.setUrl( "jdbc:sqlserver://db-libraryweb.library.ucla.edu:1433" );
+    ds.setUsername( "Hours_Update" );
+    ds.setPassword( "Hours_Update_pwd" );
+    
     return ds;
   }
 
@@ -46,7 +50,11 @@ public class DataSourceFactory
   {
     DriverManagerDataSource ds;
 
-    //code here for setting connection; hidden in repo version
+    ds = new DriverManagerDataSource();
+    ds.setDriverClassName( "oracle.jdbc.OracleDriver" );
+    ds.setUrl( "jdbc:oracle:thin:@ils-db-prod.library.ucla.edu:1521:VGER" );
+    ds.setUsername( "vger_support" );
+    ds.setPassword( "vger_support_pwd" );
 
     return ds;
   }

@@ -22,6 +22,7 @@ public class VgerHoldingDataMapper
 
     bean = new VgerHoldingData();
     bean.setCallNo( rs.getString( "call_no" ) );
+    bean.setPickupLocale( rs.getString( "pickupLocale" ) );
 
     return bean;
   }

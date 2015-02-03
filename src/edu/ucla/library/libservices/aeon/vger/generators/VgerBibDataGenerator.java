@@ -50,7 +50,7 @@ public class VgerBibDataGenerator
     bibData.setSrlfItems( itemGen.getItems() );
     if ( bibData.getSrlfItems() != null && bibData.getSrlfItems().size() > 0 )
     {
-      if ( bibData.getSrlfItems().get( 0 ).getLocation().contains( "Biomedical" ) )
+      if ( bibData.getSrlfItems().get( 0 ).getPickupLocale().contains( "Biomedical" ) )
         isBio = true;
       else
         isBio = false;

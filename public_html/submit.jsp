@@ -22,13 +22,24 @@
       <!--
           function toggle_visibility(id, doSwitch) {
              var e = document.getElementById(id);
+             var form = document.getElementById('AeonRequest');
              if(doSwitch == 2)
              {
                 e.style.display = 'block';
+                form.Format.disabled = false;
+                form.ForPublication.disabled = false;
+                form.ItemInfo3.disabled = false;
+                form.RequestType.disabled = false;
+                form.SkipOrderEstimate.disabled = false;
              }
              else
              {
                 e.style.display = 'none';
+                form.Format.disabled = true;
+                form.ForPublication.disabled = true;
+                form.ItemInfo3.disabled = true;
+                form.RequestType.disabled = true;
+                form.SkipOrderEstimate.disabled = true;
              }
           }
       //-->
@@ -50,8 +61,10 @@
       </tr>
       <tr>
         <td colspan="2" align="center">Items Selected for Processing</td>
+      </tr>
     </table>
-    <form id="AeonRequest" name="AeonRequest" target="_self" method="post" action="https://speccoll.library.ucla.edu/aeon/aeon.dll">
+    <form id="AeonRequest" name="AeonRequest" target="_self" method="post" action="https://speccoll.library.ucla.edu/logon"><!--https://speccoll.library.ucla.edu/aeon/aeon.dll"-->
+    <!--form method="post" action="finalSubmit.jsp"-->
       <input name="AeonForm" value="EADRequest" type="hidden">
       <c:set var="bibRecord" value="${bibSource.bibData}"/>
       <table align="center" width="960" border="0" cellpadding="3">
@@ -87,7 +100,7 @@
                 <tr>
                   <td>
                     Format:&nbsp;
-                    <select name="Format" id="Format">
+                    <select name="Format" id="Format" disabled="true">
                       <option value="AV">Audio/video</option>
                       <option value="PDF">PDF</option>
                       <option value="TIFF">TIFF</option>
@@ -96,96 +109,120 @@
                 </tr>
                 <tr>
                   <td>
-                    <input type="checkbox" name="ForPublication" id="ForPublication" value="Yes">For Publication?
+                    <input type="checkbox" name="ForPublication" id="ForPublication" value="Yes" disabled="true">For Publication?
                   </td>
                 </tr>
                 <tr>
                   <td>
                     Project Discription<br/>
-                    <textarea cols="50" rows="5" id="ItemInfo3" name="ItemInfo3"></textarea>
+                    <textarea cols="50" rows="5" id="ItemInfo3" name="ItemInfo3" disabled="true"></textarea>
                   </td>
                 </tr>
               </table>
+              <input value="Copy" name="RequestType" id="RequestType" type="hidden" disabled="true"/>
+              <input type="hidden" name="SkipOrderEstimate" id="SkipOrderEstimate" value="Yes" disabled="true"/>
             </div>
           </td>
         </tr>
+        <tr>
+          <td colspan="2">
+            <input type="submit" value="Submit Request"/>
+          </td>
+        </tr>
       </table>
-      <c:if test="${not empty bibRecord.srlfItems}">
-        <c:set var="index" value="-1"/>
-        <input value="${param.specReq}" name="SpecialRequest" type="hidden"/>
-        <input value="${param.notes}" name="notes" type="hidden"/>
-<input name="ScheduledDate" type="hidden" value="12/01/2014"/>
-        <%--c:choose>
-          <c:when test="${not empty param.theDate}">
-            <input name="ScheduledDate" type="hidden" value="${param.theDate}"/>
-          </c:when>
-          <c:otherwise>
-            <input name="ScheduledDate" type="hidden" value="${param.textDate}"/>
-          </c:otherwise>
-        </c:choose--%>
-        <c:choose>
-          <c:when test="${bibSource.isBio}">
-            <input name="Site" type="hidden" value="BIOMED"/>
-          </c:when>
-          <c:otherwise>
-            <input name="Site" type="hidden" value="YRL"/>
-          </c:otherwise>
-        </c:choose>
-        <input type="hidden" name="SubmitButton" value="Submit Request"/>
-        <input value="${bibRecord.marc246}" name="Location" type="hidden"/>
-        <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
-          <input type="hidden" name="CallNumber" value="${yrl.callNo}"/>
-        </c:forEach>
-        <input type="hidden" name="ItemAuthor" value="${bibRecord.author}"/>
-        <input type="hidden" name="ItemDate" value="${bibRecord.pubDates}"/>
-        <table align="center" width="960" border="1" class="footer">
-          <tr>
-            <th width="25%">Item Description</th>
-            <th width="75%">Item Comment</th>
-          </tr>
-          <c:forEach var="srlf" items="${bibRecord.srlfItems}">
-            <tr>
-                <td width="75%">
-                  <c:if test="${not empty srlf.itemEnum}">
-                    ${srlf.itemEnum}&nbsp;|&nbsp;
-                  </c:if>
-                  <c:if test="${not empty srlf.chron}">
-                    ${srlf.chron}&nbsp;|&nbsp;
-                  </c:if>
-                  <c:if test="${(not empty srlf.copy) and (srlf.copy ne 0)}">
-                    Copy&nbsp;${srlf.copy}&nbsp;|&nbsp;
-                  </c:if>
-                  <c:if test="${not empty srlf.note}">
-                    ${srlf.note}&nbsp;|&nbsp;
-                  </c:if>
-                  <c:if test="${not empty srlf.oacDetails}">
-                    <br/>
-                    ${srlf.oacDetails}
-                  </c:if>
-                  <c:if test="${not empty srlf.pickupLocale}">
-                    <br/>
-                    ${srlf.pickupLocale}
-                  </c:if>
-                  <c:set var="index" value="${index + 1}"/>
-                  <input type="hidden" name="Request" value="${index}"/>
-                  <input value="${bibRecord.title}" name="ItemTitle_${index}" type="hidden"/>
-                  <input value="${srlf.itemEnum}" name="ItemVolume_${index}" type="hidden"/>
-                  <input value="${param.bibID}" name="ReferenceNumber_${index}" type="hidden"/>
-                  <input value="${srlf.itemID}" name="ItemNumber_${index}" type="hidden"/>
-                  <input value="${srlf.copy}" name="ItemIssue_${index}" type="hidden"/>
-                </td>
-                <td width="25%">
-                  <textarea cols="50" rows="10" name="DupeComment_${index}"></textarea>
-                </td>
-              </tr>
+      <input value="${param.specReq}" name="SpecialRequest" type="hidden"/>
+      <input value="${param.notes}" name="notes" type="hidden"/>
+      <c:choose>
+        <c:when test="${not empty param.theDate}">
+          <input name="ScheduledDate" type="hidden" value="${param.theDate}"/>
+        </c:when>
+        <c:otherwise>
+          <input name="ScheduledDate" type="hidden" value="${param.textDate}"/>
+        </c:otherwise>
+      </c:choose>
+      <c:choose>
+        <c:when test="${bibSource.isBio}">
+          <input name="Site" type="hidden" value="BIOMED"/>
+        </c:when>
+        <c:otherwise>
+          <input name="Site" type="hidden" value="YRL"/>
+        </c:otherwise>
+      </c:choose>
+      <input type="hidden" name="ItemAuthor" value="${bibRecord.author}"/>
+      <input type="hidden" name="ItemDate" value="${bibRecord.pubDates}"/>
+      <input type="hidden" name="SubmitButton" value="Submit Request"/>
+      <input type="hidden" name="WebRequestForm" value="DefaultRequest"/>
+      <c:choose>
+        <c:when test="${not empty bibRecord.srlfItems}">
+          <c:set var="index" value="-1"/>
+          
+          <c:forEach var="srlf" items="${bibRecord.srlfItems}" begin="0" end="0">
+            <input value="${srlf.location}" name="Location" type="hidden"/>
           </c:forEach>
-          <tr>
-            <td colspan="2">
-              <input type="submit" value="Submit Request"/>
-            </td>
-          </tr>
-        </table>
-      </c:if>
+          <table align="center" width="960" border="1" class="footer">
+            <tr>
+              <th width="25%">Item Description</th>
+              <th width="75%">Item Comment</th>
+            </tr>
+            <c:forEach var="srlf" items="${bibRecord.srlfItems}">
+              <tr>
+                  <td width="75%">
+                    <c:if test="${not empty srlf.itemEnum}">
+                      ${srlf.itemEnum}&nbsp;|&nbsp;
+                    </c:if>
+                    <c:if test="${not empty srlf.chron}">
+                      ${srlf.chron}&nbsp;|&nbsp;
+                    </c:if>
+                    <c:if test="${(not empty srlf.copy) and (srlf.copy ne 0)}">
+                      Copy&nbsp;${srlf.copy}&nbsp;|&nbsp;
+                    </c:if>
+                    <c:if test="${not empty srlf.note}">
+                      ${srlf.note}&nbsp;|&nbsp;
+                    </c:if>
+                    <c:if test="${not empty srlf.oacDetails}">
+                      <br/>
+                      ${srlf.oacDetails}
+                    </c:if>
+                    <c:if test="${not empty srlf.pickupLocale}">
+                      <br/>
+                      ${srlf.pickupLocale}
+                    </c:if>
+                    <c:set var="index" value="${index + 1}"/>
+                    <input type="hidden" name="Request" value="${index}"/>
+                    <input value="${bibRecord.title}" name="ItemTitle_${index}" type="hidden"/>
+                    <input value="${srlf.itemEnum}" name="ItemVolume_${index}" type="hidden"/>
+                    <input value="${param.bibID}" name="ReferenceNumber_${index}" type="hidden"/>
+                    <input value="${srlf.barcode}" name="ItemNumber_${index}" type="hidden"/>
+                    <input value="${srlf.copy}" name="ItemIssue_${index}" type="hidden"/>
+                    <input value="${srlf.status}" name="ItemCitation_${index}" type="hidden"/>
+                    <input type="hidden" name="CallNumber_${index}" value="${srlf.callNo}"/>
+                  </td>
+                  <td width="25%">
+                    <textarea cols="50" rows="10" name="Notes">${srlf.itemEnum}:</textarea>
+                  </td>
+                </tr>
+            </c:forEach>
+            <tr>
+              <td colspan="2">
+                <input type="submit" value="Submit Request"/>
+              </td>
+            </tr>
+          </table>
+        </c:when>
+        <c:otherwise>
+          <input type="hidden" name="Request" value="0"/>
+          <input value="${bibRecord.title}" name="ItemTitle_0" type="hidden"/>
+          <input value="" name="ItemVolume_0" type="hidden"/>
+          <input value="${param.bibID}" name="ReferenceNumber_0" type="hidden"/>
+          <input value="" name="ItemNumber_0" type="hidden"/>
+          <input value="" name="ItemIssue_0" type="hidden"/>
+          <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
+            <c:if test="${not empty yrl.callNo}">
+                <input type="hidden" name="CallNumber_0" value="${yrl.callNo}"/>
+            </c:if>
+          </c:forEach>
+        </c:otherwise>
+      </c:choose>
     </form>
   </body>
 </html>

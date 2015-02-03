@@ -37,7 +37,7 @@ public abstract class BaseGenerator
 
   protected void makeConnection()
   {
-    //ds = DataSourceFactory.createDataSource( getDbName() );
-    ds = DataSourceFactory.createVgerSource();
+    ds = DataSourceFactory.createDataSource( getDbName() );
+    //ds = DataSourceFactory.createVgerSource();
   }
 }

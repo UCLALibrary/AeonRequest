@@ -18,12 +18,28 @@
     <param-name>unitid.yrlspc</param-name>
     <param-value>23</param-value>
   </context-param>
+  <context-param>
+    <param-name>help.email</param-name>
+    <param-value>helpdesk@library.ucla.edu</param-value>
+  </context-param>
+  <context-param>
+    <param-name>help.name</param-name>
+    <param-value>Library Helpdesk</param-value>
+  </context-param>
   <servlet>
     <servlet-name>FileSubmitServlet</servlet-name>
     <servlet-class>edu.ucla.library.libservices.aeon.submission.web.FileSubmitServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>OacLinker</servlet-name>
+    <servlet-class>edu.ucla.library.libservices.aeon.vger.servlets.OacLinker</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>FileSubmitServlet</servlet-name>
     <url-pattern>/filesubmit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>OacLinker</servlet-name>
+    <url-pattern>/oaclinker</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -28,6 +28,7 @@ public class SubmitBibGenerator
 
   public VgerBibData getBibData()
   {
+    VgerHoldingDataGenerator holdingGen;
     VgerItemDataGenerator itemGen;
 
     makeConnection();
@@ -38,6 +39,11 @@ public class SubmitBibGenerator
                                                                new Object[]
           { getBibID() }, new VgerBibDataMapper() );
 
+    holdingGen = new VgerHoldingDataGenerator();
+    holdingGen.setDbName( getDbName() );
+    holdingGen.setBibID( getBibID() );
+    bibData.setYrlHoldings( holdingGen.getItems() );
+
     itemGen = new VgerItemDataGenerator();
     itemGen.setDbName( getDbName() );
     itemGen.setBibID( getBibID() );
@@ -45,7 +51,14 @@ public class SubmitBibGenerator
     bibData.setSrlfItems( itemGen.getSimpleItems() );
     if ( bibData.getSrlfItems() != null && bibData.getSrlfItems().size() > 0 )
     {
-      if ( bibData.getSrlfItems().get( 0 ).getLocation().contains( "Biomedical" ) )
+      if ( bibData.getSrlfItems().get( 0 ).getPickupLocale().contains( "Biomedical" ) )
+        isBio = true;
+      else
+        isBio = false;
+    }
+    else if ( bibData.getYrlHoldings() != null && bibData.getYrlHoldings().size() > 0 )
+    {
+      if ( bibData.getYrlHoldings().get( 0 ).getPickupLocale().contains( "Biomedical" ) )
         isBio = true;
       else
         isBio = false;

@@ -4,6 +4,7 @@ import edu.ucla.library.libservices.aeon.submission.builder.FileBuilder;
 import edu.ucla.library.libservices.aeon.vger.beans.VgerBibData;
 import edu.ucla.library.libservices.aeon.vger.beans.VgerHoldingData;
 import edu.ucla.library.libservices.aeon.vger.beans.VgerItemData;
+import edu.ucla.library.libservices.aeon.vger.generators.SubmitBibGenerator;
 import edu.ucla.library.libservices.aeon.vger.generators.VgerBibDataGenerator;
 
 import edu.ucla.library.libservices.aeon.vger.utility.AvailableDates;
@@ -28,27 +29,36 @@ public class Tester
 
   public static void main( String[] args )
   {
+    SubmitBibGenerator generator;
+    VgerBibData bibRecord;
+
+    generator = new SubmitBibGenerator();
+    generator.setBibID( "5006581" );
+    generator.setDbName( "" );
+    generator.setItemIDs( new String[]{ "8118105","8118106","8118108" } );
+    bibRecord = generator.getBibData();
+    System.out.println( "isBio = " + generator.isIsBio() );
+    /*
     AvailableDates dateGetter;
     String[] availables;
-    
+
     dateGetter = new AvailableDates();
     dateGetter.setDbName( "" );
     dateGetter.setUnitID( "23" );
-    
+
     availables = dateGetter.getAvailables();
 
     for ( int j = 0; j < 14; j++ )
       System.out.println( availables[j] );
 
-    /*
     int dayOfWeek;
     Calendar calendar;
     String[] availables;
-    
+
     calendar = new GregorianCalendar();
     dayOfWeek = calendar.get( Calendar.DAY_OF_WEEK );
     availables = new String[14];
-    
+
     System.out.println( "Original DAY_OF_WEEK: " + DATE_OUTPUT.format( calendar.getTime() ) );
                         //calendar.getDisplayName( Calendar.DAY_OF_WEEK, Calendar.LONG, new Locale( "en", "US" ) ) );
     switch ( dayOfWeek )
@@ -63,7 +73,7 @@ public class Tester
       case 6 :
         calendar.add( Calendar.DAY_OF_WEEK, 4 );
         break;
-      case 7 : 
+      case 7 :
         calendar.add( Calendar.DAY_OF_WEEK, 3 );
         break;
     }

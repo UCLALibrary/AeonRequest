@@ -11,6 +11,8 @@ public class VgerHoldingData
 {
   @XmlElement( name = "callNo" )
   private String callNo;
+  @XmlElement( name = "pickupLocale" )
+  private String pickupLocale;
   
   public VgerHoldingData()
   {
@@ -25,5 +27,15 @@ public class VgerHoldingData
   public String getCallNo()
   {
     return callNo;
+  }
+
+  public void setPickupLocale( String pickupLocale )
+  {
+    this.pickupLocale = pickupLocale;
+  }
+
+  public String getPickupLocale()
+  {
+    return pickupLocale;
   }
 }

@@ -62,11 +62,12 @@ public class VgerItemDataGenerator
     + "vger_support.get_status_desc(ucladb.getLatestItemStatus(i.item_id)) AS " 
     + "status,vger_support.bio_or_yrl(mm.location_id) AS pickupLocale," 
     + "vger_support.get_aeon_852_note(mm.mfhd_id) AS note FROM " 
-    + "ucladb.mfhd_item mi INNER JOIN ucladb.mfhd_master mm ON mi.mfhd_id = " 
-    + "mm.mfhd_id INNER JOIN vger_support.aeon_locations al ON mm.location_id " 
-    + "= al.location_id LEFT OUTER JOIN ucladb.item i ON mi.item_id = " 
-    + "i.item_id LEFT OUTER JOIN ucladb.item_barcode ib ON i.item_id = " 
-    + "ib.item_id WHERE mi.item_id = ?";
+    + "ucladb.bib_mfhd bm INNER JOIN ucladb.mfhd_master mm ON bm.mfhd_id =" 
+    + " mm.mfhd_id INNER JOIN vger_support.aeon_locations al ON mm.location_id" 
+    + " = al.location_id INNER JOIN ucladb.mfhd_item mi ON mm.mfhd_id = " 
+    + "mi.mfhd_id LEFT OUTER JOIN ucladb.item i ON mi.item_id = i.item_id " 
+    + "LEFT OUTER JOIN ucladb.item_barcode ib ON i.item_id = ib.item_id AND " 
+    + "ib.barcode_status = 1 WHERE mi.item_id = ?";
 
   public VgerItemDataGenerator()
   {
@@ -78,19 +79,22 @@ public class VgerItemDataGenerator
     makeConnection();
     items = new ArrayList<VgerItemData>();
     
-    for ( String id : getItemIDs() )
+    if ( getItemIDs() != null && getItemIDs().length != 0 )
     {
-      try
+      for ( String id : getItemIDs() )
       {
-        VgerItemData theItem;
-        
-        theItem =
-            ( VgerItemData ) new JdbcTemplate( ds ).queryForObject( ITEM_QUERY, new Object[]{id}, new VgerItemDataMapper() );
-        items.add( theItem );
-      }
-      catch (Exception e)
-      {
-        e.printStackTrace();
+        try
+        {
+          VgerItemData theItem;
+          
+          theItem =
+              ( VgerItemData ) new JdbcTemplate( ds ).queryForObject( ITEM_QUERY, new Object[]{id}, new VgerItemDataMapper() );
+          items.add( theItem );
+        }
+        catch (Exception e)
+        {
+          e.printStackTrace();
+        }
       }
     }
 

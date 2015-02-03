@@ -11,9 +11,60 @@
 
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="http://www.library.ucla.edu/css/wht.css" rel="stylesheet" type="text/css">
     <title>Library Special Collections</title>
+    <script language="javascript" type="text/javascript">
+      <!--
+        function validateForm(formObj)
+        {
+          var customDate = 0;
+          var selectedDate = 0;
+          var pattern = /\d{2}\/\d{2}\/\d{4}/;
+          
+          for ( var i = 0; i < formObj.theDate.length; i++ )
+          {
+            if ( formObj.theDate[i].checked )
+              selectedDate += 1;
+          }
+          
+          if ( formObj.textDate.value.replace(/^(\s+)/,"").replace(/(\s+)$/,"") != "" )
+          {
+            if ( !pattern.test( formObj.textDate.value ) )
+            {
+              alert( "The date value must be in MM/DD/YYYY format" );
+              formObj.textDate.select();
+              formObj.textDate.focus();
+              return false;
+            }
+            else
+              customDate += 1;
+          }
+          
+          if ( ( customDate > 0 ) || ( selectedDate > 0 ) )
+            return true;
+          else
+          {
+            alert( "You must either select a listed date or enter a desired date for your visit" );
+            return false;
+          }
+        }
+
+        function clearRadioDates()
+        {
+          var formObj = document.getElementById("bibForm");
+          var textDate = document.getElementById("textDate").value;
+          
+          if ( textDate != "" )
+          {
+            for ( i = 0; i < formObj.theDate.length; i++ )
+            {
+              formObj.theDate[ i ].checked = false;
+            }
+          }
+        }
+      -->
+    </script>
   </head>
   <body bgcolor="#FFFFFF" topmargin="0" marginheight="0" marginwidth="0" leftmargin="0" width="960">
     <table width="960" cellpadding="0" cellspacing="0" align="center">
@@ -37,12 +88,19 @@
           are considering including which location you will go to view the 
           material.  There are two possible locations: Biomed and YRL.  All of 
           our material is non-circulating and cannot be transferred between the 
-          Reading Rooms.<br/>
+          Reading Rooms.<br/><br/>
           You may select as many items as you like, but be aware there is a 
           daily limit of 5 items per researcher for material retrieved from 
-          off-site storage.<br/>
+          off-site storage.<br/><br/>
+          <!--b>If this is your <em>first</em> time using this system:<br/> 
+          Before you proceed with your request, please 
+          follow this link to create a user account with Library Special 
+          Collections: <a href="https://speccoll.library.ucla.edu/logon" target="_blank">Aeon registration</a></b> When 
+          you click on this link, a registration page will open up in a new tab, 
+          please follow instructions on that page. You may then proceed below 
+          with paging material from Library Special Collections.<br/-->
           If you would like to see the material in a particular order, please 
-          indicate so in the “Notes” area.<br/>
+          indicate so in the “Notes” area.<br/><br/>
           Please review your selections before clicking the “Submit Request” 
           button and note the location listed.
         </td>
@@ -50,7 +108,7 @@
     </table>
     <br/>
     <c:set var="bibRecord" value="${bibSource.bibData}"/>
-    <form action="submit.jsp" method="POST">
+    <form action="submit.jsp" id="bibForm" method="POST" onsubmit="JavaScript:return validateForm(this);">
       <input type="hidden" name="bibID" value="${param.bibID}"/>
       <table align="center" width="960" border="0" cellpadding="3">
         <tr>
@@ -113,8 +171,7 @@
             Please enter any special requests or questions you have for library staff.
           </td>
           <td>
-            <textarea cols="50" rows="5" name="specReq">
-            </textarea>
+            <textarea cols="50" rows="5" name="specReq"></textarea>
           </td>
         </tr>
         <tr>
@@ -123,11 +180,10 @@
             enter any notes about this request for your personal reference.
           </td>
           <td>
-            <textarea cols="50" rows="5" name="notes">
-            </textarea>
+            <textarea cols="50" rows="5" name="Notes"></textarea>
           </td>
         </tr>
-        <%--jsp:useBean id="dateGetter"
+        <jsp:useBean id="dateGetter"
                      class="edu.ucla.library.libservices.aeon.vger.utility.AvailableDates">
           <c:choose>
             <c:when test="${bibSource.isBio}">
@@ -167,12 +223,12 @@
                     </c:forEach>
                   </td>
                   <td>
-                    <input name="textDate" value=""/>
+                    <input name="textDate" id="textDate" value="" onchange="clearRadioDates();" placeholder="MM/DD/YYYY"/>
                   </td>
                 </tr>
               </table>
           </td>
-        </tr--%>
+        </tr>
         <tr>
           <td colspan="2">
             <input type="submit" value="Submit Request"/>

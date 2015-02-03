@@ -42,8 +42,8 @@ public class AvailableDates
 
   private void makeConnection()
   {
-    //ds = DataSourceFactory.createDataSource( getDbName() );
-    ds = DataSourceFactory.createHoursSource();
+    ds = DataSourceFactory.createDataSource( getDbName() );
+    //ds = DataSourceFactory.createHoursSource();
   }
 
   public void setDbName( String dbName )
