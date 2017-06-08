@@ -43,8 +43,8 @@ public class DataSourceFactory
     ds  = new DriverManagerDataSource();
     ds.setDriverClassName( "com.microsoft.sqlserver.jdbc.SQLServerDriver" );
     ds.setUrl( "jdbc:sqlserver://db-libraryweb.library.ucla.edu:1433" );
-    ds.setUsername( "Hours_Update" );
-    ds.setPassword( "Hours_Update_pwd" );
+    ds.setUsername( "hours user" );
+    ds.setPassword( "hours pass" );
     
     return ds;
   }
@@ -56,8 +56,8 @@ public class DataSourceFactory
     ds = new DriverManagerDataSource();
     ds.setDriverClassName( "oracle.jdbc.OracleDriver" );
     ds.setUrl( "jdbc:oracle:thin:@ils-db-prod.library.ucla.edu:1521:VGER" );
-    ds.setUsername( "vger_support" );
-    ds.setPassword( "vger_support_pwd" );
+    ds.setUsername( "vger user" );
+    ds.setPassword( "vger pass" );
 
     return ds;
   }
