@@ -86,8 +86,9 @@
           Welcome to UCLA Library Special Collections.  Thank you for your 
           interest in our holdings.  Below are the details of the material you 
           are considering including which location you will go to view the 
-          material.  There are two possible locations: Biomed and YRL.  All of 
-          our material is non-circulating and cannot be transferred between the 
+          material.  There are two possible locations: Louise M. Darling 
+          Biomedical Library and Charles E. Young Research Library. All of our 
+          material is non-circulating and cannot be transferred between the 
           Reading Rooms.<br/><br/>
           You may select as many items as you like, but be aware there is a 
           daily limit of 5 items per researcher for material retrieved from 
@@ -171,7 +172,7 @@
             Please enter any special requests or questions you have for library staff.
           </td>
           <td>
-            <textarea cols="50" rows="5" name="specReq"></textarea>
+            <textarea cols="50" rows="5" name="specReq" placeholder="maximum 255 characters"></textarea>
           </td>
         </tr>
         <tr>
@@ -231,7 +232,8 @@
         </tr>
         <tr>
           <td colspan="2">
-            <input type="submit" value="Submit Request"/>
+            <!--input type="submit" value="Confirm Request"/-->
+            &nbsp;
           </td>
         </tr>
       </table>
@@ -287,7 +289,7 @@
           <table align="center" width="960" border="0" class="footer">
             <tr>
               <td>
-                <input type="submit" value="Submit Request"/>
+                <input type="submit" value="Confirm Request"/>
               </td>
             </tr>
           </table>

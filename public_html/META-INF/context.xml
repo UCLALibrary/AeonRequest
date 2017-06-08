@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<Context>
+    <!-- Default set of monitored resources -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <ResourceLink name="jdbc/scheduleDS"
+                 global="jdbc/scheduleDS"
+                  type="javax.sql.DataSource" />
+    <ResourceLink name="jdbc/rssDS"
+                 global="jdbc/rssDS"
+                  type="javax.sql.DataSource" />
+</Context>

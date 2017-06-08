@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -32,6 +33,8 @@ import org.w3c.dom.traversal.TreeWalker;
 
 import org.xml.sax.SAXException;
 
+import org.apache.log4j.Logger;
+
 public class VgerItemDataGenerator
   extends BaseGenerator
 {
@@ -39,6 +42,8 @@ public class VgerItemDataGenerator
   private Map<String, String> details;
   private String url;
   private String[] itemIDs;
+  private static final Logger logger =
+    Logger.getLogger( VgerItemDataGenerator.class );
 
   private static final String BOX_PATTERN = "\\Qbox.\\E\\d+";
   private static final String SERIES_PATTERN = "\\Qser.\\E[a-zA-Z]+\\s";
@@ -67,7 +72,7 @@ public class VgerItemDataGenerator
     + " = al.location_id INNER JOIN ucladb.mfhd_item mi ON mm.mfhd_id = " 
     + "mi.mfhd_id LEFT OUTER JOIN ucladb.item i ON mi.item_id = i.item_id " 
     + "LEFT OUTER JOIN ucladb.item_barcode ib ON i.item_id = ib.item_id AND " 
-    + "ib.barcode_status = 1 WHERE mi.item_id = ?";
+    + "ib.barcode_status = 1 WHERE mi.item_id = ? AND bm.bib_id = ?";
 
   public VgerItemDataGenerator()
   {
@@ -88,7 +93,7 @@ public class VgerItemDataGenerator
           VgerItemData theItem;
           
           theItem =
-              ( VgerItemData ) new JdbcTemplate( ds ).queryForObject( ITEM_QUERY, new Object[]{id}, new VgerItemDataMapper() );
+              ( VgerItemData ) new JdbcTemplate( ds ).queryForObject( ITEM_QUERY, new Object[]{id,getBibID()}, new VgerItemDataMapper() );
           items.add( theItem );
         }
         catch (Exception e)
@@ -107,10 +112,15 @@ public class VgerItemDataGenerator
 
     try
     {
+      //System.out.println( "executing items query @ " + new Date() );
       items = new JdbcTemplate( ds ).query( ITEMS_QUERY, new Object[]
             { getBibID() }, new VgerItemDataMapper() );
+      System.out.println( "number of items = " + items.size() );
+      //System.out.println( "done executing holdings query @ " + new Date() );
 
+      //System.out.println( "getting ead data @ " + new Date() );
       populateMap();
+      //System.out.println( "done getting ead data @ " + new Date() );
       /*for ( String theKey : details.keySet() )
         System.out.println( theKey );*/
       for ( VgerItemData theItem: items )
@@ -145,12 +155,16 @@ public class VgerItemDataGenerator
 
       try
       {
+        System.out.println( "in populateMap, opening EAD URL" );
+        logger.info( "in populateMap, opening EAD URL" );
         document =
             DocumentBuilderFactory.newInstance().newDocumentBuilder().parse( new URL( ead ).openStream() );
+        logger.info( "in populateMap, after opening EAD URL" );
         domimpl = document.getImplementation();
 
         if ( domimpl.hasFeature( "Traversal", "2.0" ) )
         {
+          System.out.println( "doing EAD traversal" );
           traversal = ( DocumentTraversal ) document;
           walker =
               traversal.createTreeWalker( document.getDocumentElement(),
@@ -175,8 +189,8 @@ public class VgerItemDataGenerator
                 {
                   try
                   {
-                    for ( index = Integer.parseInt( range[ 0 ] );
-                          index <= Integer.parseInt( range[ 1 ] );
+                    for ( index = Integer.parseInt( range[ 0 ].trim() );
+                          index <= Integer.parseInt( range[ 1 ].trim() );
                           index++ )
                     {
                       addDetails( thisNode, String.valueOf( index ) );
@@ -200,14 +214,17 @@ public class VgerItemDataGenerator
       catch ( ParserConfigurationException pce )
       {
         pce.printStackTrace();
+        logger.error( "Parse error in getEadURL, " + pce.getMessage() );
       }
       catch ( SAXException saxe )
       {
         saxe.printStackTrace();
+        logger.error( "SAX error in getEadURL, " + saxe.getMessage() );
       }
       catch ( IOException ioe )
       {
         ioe.printStackTrace();
+        logger.error( "IO error in getEadURL, " + ioe.getMessage() );
       }
     }
   }
@@ -236,6 +253,7 @@ public class VgerItemDataGenerator
 
   private void setDetails( VgerItemData theItem )
   {
+    System.out.println( "working with item " + theItem.getBarcode() );
     if ( theItem.getItemEnum() != null &&
          theItem.getItemEnum().length() != 0 &&
          !theItem.getItemEnum().equals( "" ) )
@@ -299,13 +317,16 @@ public class VgerItemDataGenerator
 
       try
       {
+        logger.info( "in getEadURL, opening OAC URL" );
         in =
             new BufferedReader( new InputStreamReader( new URL( getUrl() ).openStream() ) );
+        logger.info( "in getEadURL, after opening OAC URL" );
         while ( ( inputLine = in.readLine() ) != null )
         {
-          if ( inputLine.contains( "EAD" ) )
+          if ( inputLine.contains( "EAD: " ) )
           {
             result = inputLine.substring( inputLine.indexOf( "http" ) );
+            System.out.println( "getting EAD URL " + result );
           }
         }
         in.close();
@@ -313,10 +334,12 @@ public class VgerItemDataGenerator
       catch ( MalformedURLException me )
       {
         me.printStackTrace();
+        logger.error( "malformed URL in getEadURL, " + me.getMessage() );
       }
       catch ( IOException ioe )
       {
         ioe.printStackTrace();
+        logger.error( "IO error in getEadURL, " + ioe.getMessage() );
       }
 
       return result;

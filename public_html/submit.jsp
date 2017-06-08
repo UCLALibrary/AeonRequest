@@ -114,7 +114,7 @@
                 </tr>
                 <tr>
                   <td>
-                    Project Discription<br/>
+                    Project Description<br/>
                     <textarea cols="50" rows="5" id="ItemInfo3" name="ItemInfo3" disabled="true"></textarea>
                   </td>
                 </tr>
@@ -126,7 +126,8 @@
         </tr>
         <tr>
           <td colspan="2">
-            <input type="submit" value="Submit Request"/>
+            <!--input type="submit" value="Submit Request"/-->
+            &nbsp;
           </td>
         </tr>
       </table>
@@ -221,6 +222,7 @@
                 <input type="hidden" name="CallNumber_0" value="${yrl.callNo}"/>
             </c:if>
           </c:forEach>
+          <br/><input type="submit" value="Submit Request"/>
         </c:otherwise>
       </c:choose>
     </form>

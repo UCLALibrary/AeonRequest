@@ -1,5 +1,6 @@
 package edu.ucla.library.libservices.aeon.vger.db.source;
 
+import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -16,13 +17,15 @@ public class DataSourceFactory
 
   public static DataSource createDataSource( String name )
   {
+    Context envContext;
     InitialContext context;
     DataSource connection;
 
     try
     {
       context = new InitialContext();
-      connection = ( DataSource ) context.lookup( name );
+      envContext = (Context)context.lookup("java:/comp/env");
+      connection = ( DataSource ) envContext.lookup( name ); //( DataSource ) context.lookup( name );
     }
     catch ( NamingException e )
     {
@@ -39,9 +42,9 @@ public class DataSourceFactory
     
     ds  = new DriverManagerDataSource();
     ds.setDriverClassName( "com.microsoft.sqlserver.jdbc.SQLServerDriver" );
-    ds.setUrl( "sql_server_url" );
-    ds.setUsername( "sql_server_user" );
-    ds.setPassword( "sql_server__pwd" );
+    ds.setUrl( "jdbc:sqlserver://db-libraryweb.library.ucla.edu:1433" );
+    ds.setUsername( "Hours_Update" );
+    ds.setPassword( "Hours_Update_pwd" );
     
     return ds;
   }
@@ -52,9 +55,9 @@ public class DataSourceFactory
 
     ds = new DriverManagerDataSource();
     ds.setDriverClassName( "oracle.jdbc.OracleDriver" );
-    ds.setUrl( "oracle_url" );
-    ds.setUsername( "oracle_user" );
-    ds.setPassword( "oracle_pwd" );
+    ds.setUrl( "jdbc:oracle:thin:@ils-db-prod.library.ucla.edu:1521:VGER" );
+    ds.setUsername( "vger_support" );
+    ds.setPassword( "vger_support_pwd" );
 
     return ds;
   }
