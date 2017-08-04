@@ -194,7 +194,7 @@
               <jsp:setProperty name="dateGetter" property="unitID" value='<%= application.getInitParameter("unitid.yrlspc") %>'/>
             </c:otherwise>
           </c:choose>
-          <jsp:setProperty name="dateGetter" property="dbName" value='<%= application.getInitParameter("datasource.hours") %>'/>
+          <%--jsp:setProperty name="dateGetter" property="dbName" value='<%= application.getInitParameter("datasource.hours") %>'/--%>
         </jsp:useBean>
         
         <c:set var="openDates" value="${dateGetter.availables}"/>

@@ -1,46 +1,117 @@
 package edu.ucla.library.libservices.aeon.vger.utility;
 
-import edu.ucla.library.libservices.aeon.vger.db.source.DataSourceFactory;
+import edu.ucla.library.libservices.aeon.vger.clients.CalendarClient;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
-import java.util.GregorianCalendar;
-import java.util.Calendar;
+import java.time.format.DateTimeFormatter;
 
-import javax.sql.DataSource;
-
-import org.springframework.jdbc.core.JdbcTemplate;
+import java.util.List;
 
 public class AvailableDates
 {
-  private static final DateFormat DATE_OUTPUT =
-    new SimpleDateFormat( "MM/dd/yyyy" );
-  private static final String QUERY =
-    "select Library_Web.dbo.is_unit_open(?, ?)"; //date, unit ID
+  private static final DateTimeFormatter DATE_OUTPUT = DateTimeFormatter.ofPattern( "MM/dd/yyyy" );
+  private static final DateTimeFormatter DATE_CONVERT = DateTimeFormatter.ofPattern( "yyyy-MM-dd" );
+  private static final String BASE_URL = "https://webservices.library.ucla.edu/calendar/hours/weekly/";
+  private static final int TWEO_MONTHS = 8;
 
-  private Calendar calendar;
+  private LocalDate firstDate;
+  private CalendarClient client;
+  private List<String> openDates;
   private String[] availables;
-  private String dbName;
-  private DataSource ds;
   private String unitID;
 
   public AvailableDates()
   {
     super();
-    calendar = new GregorianCalendar();
+    firstDate = LocalDate.now();
     availables = new String[ 14 ];
   }
 
   public String[] getAvailables()
   {
-    makeConnection();
-    getFirstDate();
-    getRemainingDates();
+    findFirstDate();
+    findOpenDates();
+    findAvailableDates();
     return availables;
   }
 
-  private void makeConnection()
+  private void findFirstDate()
+  {
+    switch ( firstDate.getDayOfWeek().getValue() )
+    {
+      case 7:
+      case 1:
+      case 2:
+      case 3:
+        firstDate = firstDate.plusDays( 2 );
+        break;
+      case 4:
+      case 5:
+        firstDate = firstDate.plusDays( 4 );
+        break;
+      case 6:
+        firstDate = firstDate.plusDays( 3 );
+        break;
+    }
+  }
+
+  private void findOpenDates()
+  {
+    String unitURL;
+
+    client = new CalendarClient();
+    unitURL =
+      BASE_URL.concat( String.valueOf( getUnitID() ) ).concat( "/weeks/" ).concat( String.valueOf( TWEO_MONTHS ) );
+
+    client.setRequetURL( unitURL );
+    openDates = CalendarExtractor.getOpenDates( client.getDates() );
+  }
+
+  private void findAvailableDates()
+  {
+    int addedIndex;
+    int index;
+
+    addedIndex = 0;
+
+    for ( index = 0; index < openDates.size() && addedIndex < 14; index++ )
+    {
+      if ( !LocalDate.parse( openDates.get( index ), DATE_CONVERT ).isBefore( firstDate ) )
+      {
+        availables[ addedIndex ] = DATE_OUTPUT.format( LocalDate.parse( openDates.get( index ), DATE_CONVERT ) );
+        addedIndex++;
+      }
+    }
+  }
+
+  public void setUnitID( String unitID )
+  {
+    this.unitID = unitID;
+  }
+
+  private String getUnitID()
+  {
+    return unitID;
+  }
+}
+/*
+ * determine possible first day
+ * retrieve 2 months of calendar
+ * extract all open days from 2 months list
+ * loop through & save open dates later than possible first day
+ * populate output array
+ */
+
+//import edu.ucla.library.libservices.aeon.vger.db.source.DataSourceFactory;
+//import javax.sql.DataSource;
+
+//import org.springframework.jdbc.core.JdbcTemplate;
+//import org.springframework.jdbc.core.JdbcTemplate;
+  //private String dbName;
+  //private DataSource ds;
+  //makeConnection();
+  /*private void makeConnection()
   {
     ds = DataSourceFactory.createDataSource( getDbName() );
     //ds = DataSourceFactory.createHoursSource();
@@ -54,59 +125,23 @@ public class AvailableDates
   private String getDbName()
   {
     return dbName;
-  }
+  }*/
 
-  private void getFirstDate()
+  //while ( !isUnitOpen() )
+    //calendar.add( Calendar.DAY_OF_WEEK, 1 );
+
+  //availables[ 0 ] = DATE_OUTPUT.format( calendar.getTime() );
+  /*for ( int i = 1; i < 14; i++ )
   {
-    int dayOfWeek;
-    dayOfWeek = calendar.get( Calendar.DAY_OF_WEEK );
-
-    switch ( dayOfWeek )
-    {
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-        calendar.add( Calendar.DAY_OF_WEEK, 2 );
-        break;
-      case 5:
-      case 6:
-        calendar.add( Calendar.DAY_OF_WEEK, 4 );
-        break;
-      case 7:
-        calendar.add( Calendar.DAY_OF_WEEK, 3 );
-        break;
-    }
+    calendar.add( Calendar.DAY_OF_WEEK, 1 );
     while ( !isUnitOpen() )
       calendar.add( Calendar.DAY_OF_WEEK, 1 );
-
-    availables[ 0 ] = DATE_OUTPUT.format( calendar.getTime() );
-  }
-
-  private void getRemainingDates()
-  {
-    for ( int i = 1; i < 14; i++ )
-    {
-      calendar.add( Calendar.DAY_OF_WEEK, 1 );
-      while ( !isUnitOpen() )
-        calendar.add( Calendar.DAY_OF_WEEK, 1 );
-      availables[ i ] = DATE_OUTPUT.format( calendar.getTime() );
-    }
-  }
-
-  private boolean isUnitOpen()
+    availables[ i ] = DATE_OUTPUT.format( calendar.getTime() );
+  }*/
+  /*private boolean isUnitOpen()
   {
     return (  new JdbcTemplate( ds ).queryForInt( QUERY, new Object[]
           { calendar.getTime(), getUnitID() } ) != 0 );
-  }
+  }*/
 
-  public void setUnitID( String unitID )
-  {
-    this.unitID = unitID;
-  }
-
-  private String getUnitID()
-  {
-    return unitID;
-  }
-}
+  //private static final String QUERY = "select Library_Web.dbo.is_unit_open(?, ?)"; //date, unit ID
