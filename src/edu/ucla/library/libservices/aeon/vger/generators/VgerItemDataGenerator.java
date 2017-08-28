@@ -115,7 +115,7 @@ public class VgerItemDataGenerator
       //System.out.println( "executing items query @ " + new Date() );
       items = new JdbcTemplate( ds ).query( ITEMS_QUERY, new Object[]
             { getBibID() }, new VgerItemDataMapper() );
-      System.out.println( "number of items = " + items.size() );
+      //System.out.println( "number of items = " + items.size() );
       //System.out.println( "done executing holdings query @ " + new Date() );
 
       //System.out.println( "getting ead data @ " + new Date() );
@@ -155,7 +155,7 @@ public class VgerItemDataGenerator
 
       try
       {
-        System.out.println( "in populateMap, opening EAD URL" );
+        //System.out.println( "in populateMap, opening EAD URL" );
         logger.info( "in populateMap, opening EAD URL" );
         document =
             DocumentBuilderFactory.newInstance().newDocumentBuilder().parse( new URL( ead ).openStream() );
@@ -164,7 +164,7 @@ public class VgerItemDataGenerator
 
         if ( domimpl.hasFeature( "Traversal", "2.0" ) )
         {
-          System.out.println( "doing EAD traversal" );
+          //System.out.println( "doing EAD traversal" );
           traversal = ( DocumentTraversal ) document;
           walker =
               traversal.createTreeWalker( document.getDocumentElement(),
@@ -253,7 +253,7 @@ public class VgerItemDataGenerator
 
   private void setDetails( VgerItemData theItem )
   {
-    System.out.println( "working with item " + theItem.getBarcode() );
+    //System.out.println( "working with item " + theItem.getBarcode() );
     if ( theItem.getItemEnum() != null &&
          theItem.getItemEnum().length() != 0 &&
          !theItem.getItemEnum().equals( "" ) )
@@ -326,7 +326,7 @@ public class VgerItemDataGenerator
           if ( inputLine.contains( "EAD: " ) )
           {
             result = inputLine.substring( inputLine.indexOf( "http" ) );
-            System.out.println( "getting EAD URL " + result );
+            //System.out.println( "getting EAD URL " + result );
           }
         }
         in.close();

@@ -14,7 +14,7 @@ public class AvailableDates
   private static final DateTimeFormatter DATE_CONVERT = DateTimeFormatter.ofPattern( "yyyy-MM-dd" );
   private static final String BASE_URL = "https://webservices.library.ucla.edu/calendar/hours/weekly/";
   private static final int TWEO_MONTHS = 8;
-
+  
   private LocalDate firstDate;
   private CalendarClient client;
   private List<String> openDates;
