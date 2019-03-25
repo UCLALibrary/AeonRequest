@@ -9,7 +9,7 @@
   <jsp:setProperty name="bibSource" property="dbName" value='<%= application.getInitParameter("datasource.vger") %>'/>
 </jsp:useBean>
 
-<html>
+<html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="http://www.library.ucla.edu/css/wht.css" rel="stylesheet" type="text/css">
@@ -70,10 +70,10 @@
     <table width="960" cellpadding="0" cellspacing="0" align="center">
       <tr>
         <td width="165" bgcolor="#3283BE" align="center">
-          <img src="http://www.library.ucla.edu/sites/all/themes/uclalib_omega/logo.png">
+          <img alt="UCLA Library Logo" src="http://www.library.ucla.edu/sites/all/themes/uclalib_omega/logo.png">
         </td>
         <td bgcolor="#3283BE" align="center">
-          <font color="#666" class="body"><b>Library Special Collections</b></font><br/>
+         <h1><font color="#ffffff" class="body"><b>Library Special Collections</b></font><br/></h1>
         </td>
         <td  width="155" bgcolor="#3283BE">
         </td>
@@ -168,20 +168,20 @@
         </tr>
         <tr>
           <td>
-            Special Requests/Questions?<br/>
-            Please enter any special requests or questions you have for library staff.
+            <label for="specReq">Special Requests/Questions?<br/>
+            Please enter any special requests or questions you have for library staff.</label>
           </td>
           <td>
-            <textarea cols="50" rows="5" name="specReq" placeholder="maximum 255 characters"></textarea>
+            <textarea cols="50" rows="5" name="specReq" id="specReq" placeholder="maximum 255 characters"></textarea>
           </td>
         </tr>
         <tr>
           <td>
-            My Notes:<br/>
-            enter any notes about this request for your personal reference.
+            <label for="Notes">My Notes:<br/>
+            enter any notes about this request for your personal reference.</label>
           </td>
           <td>
-            <textarea cols="50" rows="5" name="Notes"></textarea>
+            <textarea cols="50" rows="5" name="Notes" id="Notes"></textarea>
           </td>
         </tr>
         <jsp:useBean id="dateGetter"
@@ -207,20 +207,26 @@
                     If material is stored off-site, please allow at least 3 days for retrieval.
                   </th>
                 </tr>
+              </table>
+              <fieldset>
+              <legend>Library is open on: </legend>
+              <table>
                 <tr>
                   <td>Select a listed date</td>
-                  <td>OR</td>
-                  <td>Enter a preferred date</td>
+                  <td align="center">OR</td>
+                  <td><label for="textDate">Enter a preferred date</label></td>
                 </tr>
                 <tr>
                   <td>
                     <c:forEach var="theDate" items="${openDates}" begin="0" end="6">
-                      <input type="radio" name="theDate" value="${theDate}"/>&nbsp;${theDate}<br/>
+                      <input type="radio" name="theDate" id="theDate.${theDate}" value="${theDate}"/>
+                      &nbsp;<label for="theDate.${theDate}">${theDate}</label><br/>
                     </c:forEach>
                   </td>
                   <td>
                     <c:forEach var="theDate" items="${openDates}" begin="7" end="13">
-                      <input type="radio" name="theDate" value="${theDate}"/>&nbsp;${theDate}<br/>
+                      <input type="radio" name="theDate" id="theDate.${theDate}" value="${theDate}"/>
+                      &nbsp;<label for="theDate.${theDate}">${theDate}</label><br/>
                     </c:forEach>
                   </td>
                   <td>
@@ -228,6 +234,7 @@
                   </td>
                 </tr>
               </table>
+              </fieldset>
           </td>
         </tr>
         <tr>
@@ -240,6 +247,8 @@
       <br/>
       <c:choose>
         <c:when test="${not empty bibRecord.srlfItems}">
+          <fieldset style="border-style: none; width: 960px; margin: 0 auto;">
+          <legend>Items in collection: </legend>
           <table align="center" width="960" border="1" class="footer">
             <tr>
               <th width="25%">Request</th>
@@ -248,13 +257,14 @@
             <c:forEach var="srlf" items="${bibRecord.srlfItems}">
               <tr>
                 <td width="25%" align="center">
-                  <input type="checkbox" name="itemID" value="${srlf.itemID}"/>
+                  <input type="checkbox" name="itemID" id="item.${srlf.itemID}" value="${srlf.itemID}"/>
                   <%--c:if test="${(not empty srlf.statusID) and (srlf.statusID ne 1)}">
                     <br/>
                     (${srlf.status}; There may be a delay in retrieval)
                   </c:if--%>
                 </td>
                 <td width="75%">
+                  <label for="item.${srlf.itemID}">
                   <c:if test="${not empty srlf.itemEnum}">
                     ${srlf.itemEnum}&nbsp;|&nbsp;
                   </c:if>
@@ -275,6 +285,7 @@
                     <br/>
                     ${srlf.pickupLocale}
                   </c:if>
+                  </label>
                 </td>
               </tr>
             </c:forEach>
@@ -284,6 +295,7 @@
               </td>
             </tr>
           </table>
+          </fieldset>
         </c:when>
         <c:otherwise>
           <table align="center" width="960" border="0" class="footer">
