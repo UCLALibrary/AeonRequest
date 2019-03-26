@@ -5,7 +5,7 @@
 
 <%@ page import="java.util.*" %>
 
-<html>
+<html lang="EN">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <title>Library Special Collections</title>
@@ -15,10 +15,10 @@
     <table width="960" cellpadding="0" cellspacing="0" align="center">
       <tr>
         <td width="165" bgcolor="#3283BE" align="center">
-          <img src="http://www.library.ucla.edu/sites/all/themes/uclalib_omega/logo.png">
+          <img alt="UCLA Library logo" src="http://www.library.ucla.edu/sites/all/themes/uclalib_omega/logo.png">
         </td>
         <td bgcolor="#3283BE" align="center">
-          <font color="#666" class="body"><b>Library Special Collections</b></font><br/>
+          <h1><font color="#ffffff" class="body"><b>Library Special Collections</b></font></h1><br/>
         </td>
         <td  width="155" bgcolor="#3283BE">
         </td>

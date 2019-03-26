@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page contentType="text/html;charset=utf-8" isErrorPage="true"
          import="java.io.CharArrayWriter, java.io.PrintWriter"%>
-<html>
+<html lang="EN">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="http://www.library.ucla.edu/css/wht.css" rel="stylesheet" type="text/css">
@@ -12,10 +12,10 @@
     <table width="960" cellpadding="0" cellspacing="0" align="center">
       <tr>
         <td width="165" bgcolor="#3283BE" align="center">
-          <img src="http://www.library.ucla.edu/sites/all/themes/uclalib_omega/logo.png">
+          <img alt="UCLA Library logo" src="http://www.library.ucla.edu/sites/all/themes/uclalib_omega/logo.png">
         </td>
         <td bgcolor="#3283BE" align="center">
-          <font color="#666" class="body"><b>Library Special Collections</b></font><br/>
+          <h1><font color="#ffffff" class="body"><b>Library Special Collections</b></font></h1><br/>
         </td>
         <td  width="155" bgcolor="#3283BE">
         </td>

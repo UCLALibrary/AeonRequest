@@ -10,7 +10,7 @@
   <jsp:setProperty name="bibSource" property="dbName" value='<%= application.getInitParameter("datasource.vger") %>'/>
 </jsp:useBean>
 
-<html>
+<html lang="EN">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <title>submit</title>
@@ -51,10 +51,10 @@
     <table width="960" cellpadding="0" cellspacing="0" align="center">
       <tr>
         <td width="165" bgcolor="#3283BE" align="center">
-          <img src="http://www.library.ucla.edu/sites/all/themes/uclalib_omega/logo.png">
+          <img alt="UCLA Library logo" src="http://www.library.ucla.edu/sites/all/themes/uclalib_omega/logo.png">
         </td>
         <td bgcolor="#3283BE" align="center">
-          <font color="#666" class="body"><b>Library Special Collections</b></font><br/>
+          <h1><font color="#ffffff" class="body"><b>Library Special Collections</b></font><br/></h1>
         </td>
         <td  width="155" bgcolor="#3283BE">
         </td>
@@ -89,8 +89,10 @@
         <tr>
           <td>Is this request for:</td>
           <td>
-            <input type="radio" name="reqType" value="1" checked="checked" onclick="toggle_visibility('dupe',1);">On-site review<br/>
-            <input type="radio" name="reqType" value="2" onclick="toggle_visibility('dupe',2);">Duplication
+            <input type="radio" name="reqType" id="reqType.1" value="1" checked="checked" onclick="toggle_visibility('dupe',1);">
+            <label for="reqType.1">On-site review</label><br/>
+            <input type="radio" name="reqType" id="reqType.2" value="2" onclick="toggle_visibility('dupe',2);">
+            <label for="reqType.2">Duplication</label>
           </td>
         </tr>
         <tr>
@@ -99,7 +101,7 @@
               <table>
                 <tr>
                   <td>
-                    Format:&nbsp;
+                    <label for="Format">Format:</label>&nbsp;
                     <select name="Format" id="Format" disabled="true">
                       <option value="AV">Audio/video</option>
                       <option value="PDF">PDF</option>
@@ -109,12 +111,13 @@
                 </tr>
                 <tr>
                   <td>
-                    <input type="checkbox" name="ForPublication" id="ForPublication" value="Yes" disabled="true">For Publication?
+                    <input type="checkbox" name="ForPublication" id="ForPublication" value="Yes" disabled="true">
+                    <label for="ForPublication">For Publication?</label>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    Project Description<br/>
+                    <label for="ItemInfo3">Project Description</label><br/>
                     <textarea cols="50" rows="5" id="ItemInfo3" name="ItemInfo3" disabled="true"></textarea>
                   </td>
                 </tr>
@@ -168,6 +171,7 @@
             <c:forEach var="srlf" items="${bibRecord.srlfItems}">
               <tr>
                   <td width="75%">
+                    <label for="${srlf.itemEnum}">
                     <c:if test="${not empty srlf.itemEnum}">
                       ${srlf.itemEnum}&nbsp;|&nbsp;
                     </c:if>
@@ -188,6 +192,7 @@
                       <br/>
                       ${srlf.pickupLocale}
                     </c:if>
+                    </label>
                     <c:set var="index" value="${index + 1}"/>
                     <input type="hidden" name="Request" value="${index}"/>
                     <input value="${bibRecord.title}" name="ItemTitle_${index}" type="hidden"/>
@@ -199,7 +204,7 @@
                     <input type="hidden" name="CallNumber_${index}" value="${srlf.callNo}"/>
                   </td>
                   <td width="25%">
-                    <textarea cols="50" rows="10" name="Notes">${srlf.itemEnum}:</textarea>
+                    <textarea cols="50" rows="10" name="Notes" id="${srlf.itemEnum}">${srlf.itemEnum}:</textarea>
                   </td>
                 </tr>
             </c:forEach>
