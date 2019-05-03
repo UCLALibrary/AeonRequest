@@ -32,6 +32,8 @@ public class VgerItemData
   private String callNo;
   @XmlElement( name = "location" )
   private String location;
+  @XmlElement( name = "freeText" )
+  private String freeText;
 
   public VgerItemData()
   {
@@ -156,5 +158,15 @@ public class VgerItemData
   public String getLocation()
   {
     return location;
+  }
+
+  public void setFreeText( String freeText )
+  {
+    this.freeText = freeText;
+  }
+
+  public String getFreeText()
+  {
+    return freeText;
   }
 }
