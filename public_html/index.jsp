@@ -277,6 +277,12 @@
                   <c:if test="${not empty srlf.note}">
                     ${srlf.note}&nbsp;|&nbsp;
                   </c:if>
+                  <c:if test="${not empty srlf.callNo}">
+                    ${srlf.callNo}&nbsp;|&nbsp;
+                  </c:if>
+                  <c:if test="${not empty srlf.freeText}">
+                    ${srlf.freeText}&nbsp;|&nbsp;
+                  </c:if>
                   <c:if test="${not empty srlf.oacDetails}">
                     <br/>
                     ${srlf.oacDetails}
