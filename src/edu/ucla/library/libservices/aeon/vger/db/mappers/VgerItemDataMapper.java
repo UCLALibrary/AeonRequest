@@ -25,6 +25,7 @@ public class VgerItemDataMapper
     bean.setCallNo( rs.getString( "call_no" ) );
     bean.setChron( rs.getString( "chron" ) );
     bean.setCopy( rs.getString( "copy" ) );
+    bean.setFreeText( rs.getString( "freetext" ) );
     bean.setItemEnum( rs.getString( "item_enum" ) );
     bean.setItemID( rs.getInt( "item_id" ) );
     bean.setLocation( rs.getString( "location_code" ) );
