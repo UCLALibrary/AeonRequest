@@ -13,7 +13,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="http://www.library.ucla.edu/css/wht.css" rel="stylesheet" type="text/css">
-    <title>Library Special Collections</title>
+    <title>Aeon - Submit a UCLA Library Special Collections Request</title>
     <script language="javascript" type="text/javascript">
       <!--
         function validateForm(formObj)

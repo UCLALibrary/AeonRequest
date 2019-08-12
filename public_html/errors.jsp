@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="http://www.library.ucla.edu/css/wht.css" rel="stylesheet" type="text/css">
-    <title>Errors Have Occurred</title>
+    <title>Aeon UCLA Library - An Error Occurred</title>
   </head>
   <body bgcolor="#FFFFFF" topmargin="0" marginheight="0" marginwidth="0" leftmargin="0" width="960">
     <table width="960" cellpadding="0" cellspacing="0" align="center">
