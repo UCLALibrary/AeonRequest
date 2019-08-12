@@ -8,7 +8,7 @@
 <html lang="EN">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
-    <title>Library Special Collections</title>
+    <title>Aeon UCLA Library - Logout</title>
     <link href="http://www.library.ucla.edu/css/wht.css" rel="stylesheet" type="text/css">
   </head>
   <body bgcolor="#FFFFFF" topmargin="0" marginheight="0" marginwidth="0" leftmargin="0" width="960">
