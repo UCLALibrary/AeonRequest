@@ -8,6 +8,8 @@
 <html lang="EN">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
     <title>Aeon UCLA Library - Logout</title>
     <link href="http://www.library.ucla.edu/css/wht.css" rel="stylesheet" type="text/css">
   </head>
