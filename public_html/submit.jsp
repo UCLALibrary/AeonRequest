@@ -11,6 +11,8 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html lang="EN">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
     <title>Aeon - Submit a UCLA Library Special Collections Request</title>
     <script type="text/javascript" language="JavaScript">
       /*function dologout()
