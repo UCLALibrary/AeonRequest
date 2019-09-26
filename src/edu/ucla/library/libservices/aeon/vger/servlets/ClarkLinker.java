@@ -4,7 +4,6 @@ import edu.ucla.library.libservices.aeon.vger.beans.ClarkData;
 import edu.ucla.library.libservices.aeon.vger.generators.ClarkDataGenerator;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -14,9 +13,12 @@ import java.net.URLEncoder;
 public class ClarkLinker
   extends HttpServlet
 {
+  @SuppressWarnings( "compatibility:-6391279242917955797" )
+  private static final long serialVersionUID = -3710699302679718713L;
   private static final String BASE_URL =
-    "https://aeon.clarklibrary.ucla.edu/aeon/aeon.dll?Action=10&Form=20&Value=GenericRequestMonograph";
-    //"https://aeon.clarklibrary.ucla.edu/aeon/aeon.dll/OpenURL?Action=10&Form=20&Value=GenericRequestMonograph";
+    "https://aeon.clarklibrary.ucla.edu/logon?Action=10&Form=20&Value=GenericRequestMonograph";
+
+  private static final String PERMA_LINK = "https://catalog.library.ucla.edu/vwebv/holdingsInfo?bibId=";
 
   public void init( ServletConfig config )
     throws ServletException
@@ -97,6 +99,9 @@ public class ClarkLinker
       redirect.append( "&Location=" ).append( URLEncoder.encode( data.getLocation(), "UTF-8" ) );
     }
     
+    redirect.append( "&ItemInfo3=" ).append( URLEncoder.encode( PERMA_LINK.concat( request.getParameter( "bibID" ) ), "UTF-8" ) );
+    //ItemInfo3
+    //135283
     /*if ( data.getItemInfo1() != null && data.getItemInfo1().length() > 0 )
     {
       redirect.append( "&ItemInfo1=" ).append( URLEncoder.encode( data.getItemInfo1(), "UTF-8" ) );
