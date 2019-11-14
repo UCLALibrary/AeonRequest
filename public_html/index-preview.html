@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>Aeon - Submit a UCLA Library Special Collections Request</title>
+    <script language="javascript" type="text/javascript">
+      <!--
+        function validateForm(formObj)
+        {
+          var customDate = 0;
+          var selectedDate = 0;
+          var pattern = /\d{2}\/\d{2}\/\d{4}/;
+
+          for ( var i = 0; i < formObj.theDate.length; i++ )
+          {
+            if ( formObj.theDate[i].checked )
+              selectedDate += 1;
+          }
+
+          if ( formObj.textDate.value.replace(/^(\s+)/,"").replace(/(\s+)$/,"") != "" )
+          {
+            if ( !pattern.test( formObj.textDate.value ) )
+            {
+              alert( "The date value must be in MM/DD/YYYY format" );
+              formObj.textDate.select();
+              formObj.textDate.focus();
+              return false;
+            }
+            else
+              customDate += 1;
+          }
+
+          if ( ( customDate > 0 ) || ( selectedDate > 0 ) )
+            return true;
+          else
+          {
+            alert( "You must either select a listed date or enter a desired date for your visit" );
+            return false;
+          }
+        }
+
+        function clearRadioDates()
+        {
+          var formObj = document.getElementById("bibForm");
+          var textDate = document.getElementById("textDate").value;
+
+          if ( textDate != "" )
+          {
+            for ( i = 0; i < formObj.theDate.length; i++ )
+            {
+              formObj.theDate[ i ].checked = false;
+            }
+          }
+        }
+      -->
+    </script>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-primary">
+        <img src="images/ucla-library-logo-wht.svg" alt="UCLA Library Logo" />
+        <span>Special Collections Request System</span>
+      </div>
+      <div class="nav-secondary">
+        <ul>
+          <li>Special Collections Home</li>
+          <li>UCLA Library Catalog</li>
+          <li>Online Archive of California (OAC)</li>
+          <li>FAQs</li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="container">
+      <section class="welcome border rounded shadow p-md-5 p-4">
+        <p>
+          Special Collections materials do not circulate and can only be
+          consulted in one of our reading rooms.
+        </p>
+        <ul>
+          <li>
+            Research Library Special Collections materials are accessed in the
+            Ahmanson-Murphy reading room.
+          </li>
+          <li>
+            History and Special Collections for the Sciences materials are
+            accessed in the Biomedical Library History and Special Collections
+            for Medicine and the Sciences reading room.
+          </li>
+        </ul>
+        <p>
+          Please select your requested materials and provide a date for your
+          research visit. We do not accept appointments and we are unable to
+          guarantee seating arrangements.
+        </p>
+        <p>
+          Due to space constraints, the following paging limits are enforced:
+        </p>
+        <ul>
+          <li>
+            Retrieval of off-site holdings is limited to 5 boxes/items per day
+          </li>
+          <li>
+            Retrieval of on-site holdings is limited to 5 boxes/items per hour
+          </li>
+        </ul>
+        <p>
+          If you would like to see the material in a particular order, please
+          indicate this in the “Special Requests” field.
+        </p>
+        <p>
+          You can review your selections by clicking the “Confirm Request”
+          button.
+        </p>
+      </section>
+
+      <form>
+        <!-- Request Information -->
+        <section class="req-info">
+          <!-- Table with 50-50 columns, Single header -->
+          <div class="table table-50-50">
+            <div class="t-title text-center text-white py-1">
+              Request Information
+            </div>
+            <!-- Start of row -->
+            <div class="t-row">
+              <div class="t-cell py-1 px-3 column-1">Call Number(s)</div>
+              <div class="t-cell py-1 px-3 column-2">612</div>
+            </div>
+            <!-- End of row -->
+            <!-- Start of row -->
+            <div class="t-row">
+              <div class="t-cell py-1 px-3 column-1">Author</div>
+              <div class="t-cell py-1 px-3 column-2">Susan Sontag</div>
+            </div>
+            <!-- End of row -->
+            <!-- Start of row -->
+            <div class="t-row">
+              <div class="t-cell py-1 px-3 column-1">Title</div>
+              <div class="t-cell py-1 px-3 column-2">Susan Sontag Papers</div>
+            </div>
+            <!-- End of row -->
+          </div>
+          <!--End of table -->
+        </section>
+        <hr />
+
+        <!-- Request Material -->
+        <section class="req-materials">
+          <!-- Table with column 1 at 10%, column 2 at 90% -->
+          <div class="table table-10-90">
+            <!-- Start of table heading -->
+            <div class="t-heading text-center">
+              <div class="t-cell py-2"><small>Select</small></div>
+              <div class="t-cell py-2">Item Description</div>
+            </div>
+            <!-- End of table heading -->
+            <!-- Start of row -->
+            <div class="t-row">
+              <div class="t-cell py-1 text-center column-1">Box1</div>
+              <div class="t-cell py-1 px-3 column-2">
+                Requested item description Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Commodi cum nihil velit atque quos
+                a dolores ea asperiores doloremque corrupti.
+              </div>
+            </div>
+            <!-- End of row -->
+            <!-- Start of row -->
+            <div class="t-row">
+              <div class="t-cell py-1 text-center column column-1">Box2</div>
+              <div class="t-cell py-1 px-3 column column-2">
+                Requested item description
+              </div>
+            </div>
+            <!-- End of row -->
+            <!-- Start of row -->
+            <div class="t-row">
+              <div class="t-cell py-1 text-center column column-1">Box2</div>
+              <div class="t-cell py-1 px-3 column column-2">
+                Requested item description
+              </div>
+            </div>
+            <!-- End of row -->
+            <!-- Start of row -->
+            <div class="t-row">
+              <div class="t-cell py-1 text-center column column-1">Box2</div>
+              <div class="t-cell py-1 px-3 column column-2">
+                Requested item description
+              </div>
+            </div>
+            <!-- End of row -->
+          </div>
+          <!--End of table-10-90 -->
+        </section>
+        <hr />
+
+        <!-- Request type -->
+        <section class="req-type"></section>
+
+        <!-- Date of visit -->
+        <section class="req-visit-date"></section>
+
+        <hr />
+
+        <!-- Special requests -->
+        <section class="req-notes"></section>
+
+        <hr />
+      </form>
+    </main>
+
+    <footer>
+      <small
+        >Copyright <span>©</span> 2019 UC Regents. All Rights Reserved.</small
+      >
+    </footer>
+  </body>
+</html>
