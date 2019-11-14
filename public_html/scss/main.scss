@@ -1,0 +1,62 @@
+@import "./variables";
+@import "./tables";
+@import "./navbar";
+@import "./dates";
+
+@mixin placeholder-style() {
+  font-size: 0.875rem;
+  font-style: italic;
+  opacity: 0.8;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-family: Helvetica, sans-serif;
+  color: $black;
+}
+
+hr {
+  border-top: 1px solid $ucla-lightest-blue;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  @include placeholder-style;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  @include placeholder-style;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  @include placeholder-style;
+}
+
+textarea {
+  border: 1px solid $ucla-blue;
+}
+
+// Typography
+.h4-blue {
+  color: $ucla-darker-blue;
+  font-weight: 600;
+}
+
+.welcome {
+  background-color: $off-white;
+}
+
+footer {
+  background-color: $ucla-blue;
+  margin-top: 5rem;
+}

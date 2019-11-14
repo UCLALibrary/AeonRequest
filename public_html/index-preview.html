@@ -64,10 +64,11 @@
     <nav>
       <div class="nav-primary">
         <img src="images/ucla-library-logo-wht.svg" alt="UCLA Library Logo" />
-        <span>Special Collections Request System</span>
+        <span class="navbar-pipe"></span>
+        <span class="text-logo-title">Special Collections Request System</span>
       </div>
       <div class="nav-secondary">
-        <ul>
+        <ul class="nav-links">
           <li>Special Collections Home</li>
           <li>UCLA Library Catalog</li>
           <li>Online Archive of California (OAC)</li>
@@ -76,8 +77,8 @@
       </div>
     </nav>
 
-    <main class="container">
-      <section class="welcome border rounded shadow p-md-5 p-4">
+    <main class="container my-5">
+      <section class="welcome shadow-sm rounded p-md-5 p-4">
         <p>
           Special Collections materials do not circulate and can only be
           consulted in one of our reading rooms.
@@ -103,25 +104,32 @@
         </p>
         <ul>
           <li>
-            Retrieval of off-site holdings is limited to 5 boxes/items per day
+            <strong
+              >Retrieval of off-site holdings is limited to 5 boxes/items per
+              day</strong
+            >
           </li>
           <li>
-            Retrieval of on-site holdings is limited to 5 boxes/items per hour
+            <strong
+              >Retrieval of on-site holdings is limited to 5 boxes/items per
+              hour</strong
+            >
           </li>
         </ul>
         <p>
           If you would like to see the material in a particular order, please
-          indicate this in the “Special Requests” field.
+          indicate this in the <strong>“Special Requests”</strong> field.
         </p>
         <p>
-          You can review your selections by clicking the “Confirm Request”
+          You can review your selections by clicking the
+          <strong>“Confirm Request”</strong>
           button.
         </p>
       </section>
 
-      <form>
+      <form class="mt-5">
         <!-- Request Information -->
-        <section class="req-info">
+        <section class="req-info py-4">
           <!-- Table with 50-50 columns, Single header -->
           <div class="table table-50-50">
             <div class="t-title text-center text-white py-1">
@@ -151,9 +159,9 @@
         <hr />
 
         <!-- Request Material -->
-        <section class="req-materials">
+        <section class="req-materials py-4">
           <!-- Table with column 1 at 10%, column 2 at 90% -->
-          <div class="table table-10-90">
+          <div class="table table-12-88">
             <!-- Start of table heading -->
             <div class="t-heading text-center">
               <div class="t-cell py-2"><small>Select</small></div>
@@ -200,22 +208,62 @@
         <hr />
 
         <!-- Request type -->
-        <section class="req-type"></section>
+        <section class="req-type py-4">
+          <h4 class="h4-blue">Select Request Type</h4>
+        </section>
+        <hr />
 
         <!-- Date of visit -->
-        <section class="req-visit-date"></section>
-
+        <section class="req-date py-4">
+          <h4 class="h4-blue">Select Date of Visit</h4>
+          <p class="text-danger pb-0 mb-0"><em>Required</em></p>
+          <p>
+            We cannot accommodate same day requests for off-site materials.
+            Please allow at least 3 days for retrieval of off-site materials.
+          </p>
+          <div class="req-date-row text-center">
+            <div class="date-box date-picker pl-3 pt-3">
+              <p>Select a listed date</p>
+            </div>
+            <p class="mid-col pt-3"><b>OR</b></p>
+            <div class="date-box date-input pl-3 pt-3">
+              <p>Enter your preferred date</p>
+              <input
+                name="textDate"
+                id="textDate"
+                value=""
+                onchange="clearRadioDates();"
+                placeholder="MM/DD/YYYY"
+              />
+            </div>
+          </div>
+        </section>
         <hr />
 
         <!-- Special requests -->
-        <section class="req-notes"></section>
+        <section class="req-notes py-4">
+          <h4 class="h4-blue">Special Requests</h4>
+          <p class="text-muted pb-0 mb-0"><em>Optional</em></p>
+          <label class="pt-0 pb-2" for="specReq">
+            Please enter any special requests or questions you have for library
+            staff.</label
+          ><br />
+          <textarea
+            cols="50"
+            rows="5"
+            name="specReq"
+            id="specReq"
+            maxlength="255"
+            placeholder="Maximum 255 characters"
+          ></textarea>
+        </section>
 
         <hr />
       </form>
     </main>
 
-    <footer>
-      <small
+    <footer class="p-4">
+      <small class="text-white"
         >Copyright <span>©</span> 2019 UC Regents. All Rights Reserved.</small
       >
     </footer>

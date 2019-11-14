@@ -1,0 +1,70 @@
+@import "./variables";
+
+// All Tables
+.table {
+  display: table;
+  // max-width: 900px;
+  width: 100%;
+  // margin: 0 auto;
+  border: 1px solid $ucla-blue;
+
+  .t-title {
+    display: table-caption;
+    background-color: $ucla-blue;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .t-heading {
+    display: table-row;
+    background-color: $ucla-blue;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .t-row {
+    display: table-row;
+    font-size: 14px;
+  }
+
+  .t-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .column-1 {
+    border-right: 1px solid $ucla-blue;
+  }
+
+  .t-row:nth-child(odd) {
+    background-color: $white;
+  }
+
+  .t-row:nth-child(even) {
+    background-color: $gray;
+  }
+}
+
+// Table with 50-50% columns
+.table-50-50 {
+  .t-row .column-1,
+  .t-row .column-2 {
+    width: 50%;
+  }
+}
+
+// Table with column 1 at 12%
+.table-12-88 {
+  .t-row .column-1 {
+    width: 12%;
+  }
+}
+
+// Table with 1 column at 100%
+.table-100 {
+  .column-1 {
+    border-right: 0;
+  }
+}
