@@ -1,7 +1,8 @@
 @import "./variables";
 @import "./tables";
 @import "./navbar";
-@import "./dates";
+@import "./req-dates";
+@import "./req-type";
 
 @mixin placeholder-style() {
   font-size: 0.875rem;
@@ -54,6 +55,23 @@ textarea {
 
 .welcome {
   background-color: $off-white;
+}
+
+input[type="submit"] {
+  padding: 12px 30px;
+  background: $ucla-darker-blue;
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  border: 1px solid $ucla-darker-blue;
+}
+
+input[type="submit"]:hover {
+  border: 1px solid #005587;
+  background: #fff;
+  color: #005587;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 footer {

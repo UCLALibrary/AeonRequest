@@ -1,0 +1,45 @@
+@import "./variables";
+
+input[type="radio"] {
+  margin-right: 1rem;
+}
+
+.req-type-row {
+  .req-type-box {
+    min-width: 300px;
+    max-width: 350px;
+    width: 100%;
+    border: 1px solid #005587;
+    border-radius: 3px;
+    padding: 20px 10px 10px 20px;
+    margin-top: 1rem;
+
+    // input[type="radio"] {
+    //   margin-right: 1rem;
+    // }
+  }
+}
+
+@media (min-width: 768px) {
+  .req-type-row {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+  }
+}
+
+#dupe {
+  display: none;
+}
+
+#visit {
+  display: block;
+}
+.toggled-box {
+  max-width: 800px;
+  background: $gray;
+  .input-row {
+    display: flex;
+    justify-content: space-between;
+  }
+}

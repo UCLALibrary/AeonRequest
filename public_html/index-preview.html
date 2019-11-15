@@ -7,58 +7,8 @@
     <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <script src="js/toggle.js"></script>
     <title>Aeon - Submit a UCLA Library Special Collections Request</title>
-    <script language="javascript" type="text/javascript">
-      <!--
-        function validateForm(formObj)
-        {
-          var customDate = 0;
-          var selectedDate = 0;
-          var pattern = /\d{2}\/\d{2}\/\d{4}/;
-
-          for ( var i = 0; i < formObj.theDate.length; i++ )
-          {
-            if ( formObj.theDate[i].checked )
-              selectedDate += 1;
-          }
-
-          if ( formObj.textDate.value.replace(/^(\s+)/,"").replace(/(\s+)$/,"") != "" )
-          {
-            if ( !pattern.test( formObj.textDate.value ) )
-            {
-              alert( "The date value must be in MM/DD/YYYY format" );
-              formObj.textDate.select();
-              formObj.textDate.focus();
-              return false;
-            }
-            else
-              customDate += 1;
-          }
-
-          if ( ( customDate > 0 ) || ( selectedDate > 0 ) )
-            return true;
-          else
-          {
-            alert( "You must either select a listed date or enter a desired date for your visit" );
-            return false;
-          }
-        }
-
-        function clearRadioDates()
-        {
-          var formObj = document.getElementById("bibForm");
-          var textDate = document.getElementById("textDate").value;
-
-          if ( textDate != "" )
-          {
-            for ( i = 0; i < formObj.theDate.length; i++ )
-            {
-              formObj.theDate[ i ].checked = false;
-            }
-          }
-        }
-      -->
-    </script>
   </head>
   <body>
     <nav>
@@ -127,7 +77,7 @@
         </p>
       </section>
 
-      <form class="mt-5">
+      <form id="AeonRequest" class="mt-5">
         <!-- Request Information -->
         <section class="req-info py-4">
           <!-- Table with 50-50 columns, Single header -->
@@ -209,12 +159,99 @@
 
         <!-- Request type -->
         <section class="req-type py-4">
-          <h4 class="h4-blue">Select Request Type</h4>
+          <h4 class="h4-blue mb-4">Select Request Type</h4>
+          <div class="req-type-row">
+            <div class="req-type-box mr-md-3">
+              <input
+                type="radio"
+                name="reqType"
+                id="reqType.1"
+                value="1"
+                checked="checked"
+                onclick="toggle_visibility('dupe', 'visit',1);"
+              />
+              <label for="reqType.1">On-site review</label>
+              <p><em>Request item for Reading Room use</em></p>
+            </div>
+            <div class="req-type-box">
+              <input
+                type="radio"
+                name="reqType"
+                id="reqType.2"
+                value="2"
+                onclick="toggle_visibility('dupe', 'visit',2);"
+              />
+              <label for="reqType.2">Duplication</label>
+              <p class="ml-4"><em>Submit duplication orders</em></p>
+            </div>
+          </div>
+
+          <div id="dupe" class="mt-4 toggled-box">
+            <p>
+              Duplication requests are processed in the order received and
+              generally take 2-4 weeks to complete. Duplication Services staff
+              will contact you to confirm your request when your order is ready
+              to be processed. <br /><br />
+              To view our fee schedule and policies, please visit:
+              http://library.ucla.edu/use/access-privileges/print-copy-scan/special-collections-reproductions
+            </p>
+            <label for="Format">Format:</label><br />
+            <!-- <select name="Format" id="Format" disabled="true">
+              <option value="AV">Audio/video</option>
+              <option value="PDF">PDF</option>
+              <option value="TIFF">TIFF</option>
+            </select> -->
+            <div class="input-row">
+              <span
+                ><input type="radio" name="reqType" id="reqType.2" value="AV" />
+                <label>Audio / Video</label></span
+              >
+              <span
+                ><input
+                  type="radio"
+                  name="reqType"
+                  id="reqType.2"
+                  value="PDF"
+                />
+                <label>PDF</label></span
+              >
+              <span
+                ><input
+                  type="radio"
+                  name="reqType"
+                  id="reqType.2"
+                  value="TIFF"
+                />
+                <label>TIFF</label></span
+              >
+            </div>
+            <hr />
+            <br />
+            <input
+              type="checkbox"
+              name="ForPublication"
+              id="ForPublication"
+              value="Yes"
+              disabled="true"
+            />
+            <label for="ForPublication">For Publication?</label>
+            <hr />
+            <br />
+
+            <label for="ItemInfo3">Project Description</label><br />
+            <textarea
+              cols="50"
+              rows="5"
+              id="ItemInfo3"
+              name="ItemInfo3"
+              disabled="true"
+            ></textarea>
+          </div>
         </section>
         <hr />
 
         <!-- Date of visit -->
-        <section class="req-date py-4">
+        <section class="req-date py-4" id="visit" name="Visit">
           <h4 class="h4-blue">Select Date of Visit</h4>
           <p class="text-danger pb-0 mb-0"><em>Required</em></p>
           <p>
@@ -237,8 +274,8 @@
               />
             </div>
           </div>
+          <hr />
         </section>
-        <hr />
 
         <!-- Special requests -->
         <section class="req-notes py-4">
@@ -259,6 +296,7 @@
         </section>
 
         <hr />
+        <input type="submit" value="Confirm Request" />
       </form>
     </main>
 

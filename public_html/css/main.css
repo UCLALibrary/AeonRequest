@@ -217,6 +217,54 @@ nav .nav-secondary .nav-links li {
   }
 }
 
+input[type="radio"] {
+  margin-right: 1rem;
+}
+
+.req-type-row .req-type-box {
+  min-width: 300px;
+  max-width: 350px;
+  width: 100%;
+  border: 1px solid #005587;
+  border-radius: 3px;
+  padding: 20px 10px 10px 20px;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .req-type-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    max-width: 800px;
+  }
+}
+
+#dupe {
+  display: none;
+}
+
+#visit {
+  display: block;
+}
+
+.toggled-box {
+  max-width: 800px;
+  background: #ebebeb;
+}
+
+.toggled-box .input-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 *,
 *::before,
 *::after {
@@ -299,6 +347,24 @@ textarea {
 
 .welcome {
   background-color: #f8f8f8;
+}
+
+input[type="submit"] {
+  padding: 12px 30px;
+  background: #005587;
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  border: 1px solid #005587;
+}
+
+input[type="submit"]:hover {
+  border: 1px solid #005587;
+  background: #fff;
+  color: #005587;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 footer {
