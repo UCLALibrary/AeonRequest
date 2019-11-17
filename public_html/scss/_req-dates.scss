@@ -4,6 +4,11 @@
   display: block;
   width: 100%;
 
+  .date-col-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .date-box {
     min-height: 200px;
     max-width: 400px;

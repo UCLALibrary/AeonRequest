@@ -8,247 +8,204 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
   <jsp:setProperty name="bibSource" property="dbName" value='<%= application.getInitParameter("datasource.vger") %>' />
 </jsp:useBean>
 
-<html lang="EN">
+<html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
-    <title>Aeon - Submit a UCLA Library Special Collections Request</title>
-    <script type="text/javascript" language="JavaScript">
-      /*function dologout()
-      {
-        document.AeonRequest.submit();
-      }*/
-      <!--
-          function toggle_visibility(id, doSwitch) {
-             var e = document.getElementById(id);
-             var form = document.getElementById('AeonRequest');
-             if(doSwitch == 2)
-             {
-                e.style.display = 'block';
-                form.Format.disabled = false;
-                form.ForPublication.disabled = false;
-                form.ItemInfo3.disabled = false;
-                form.RequestType.disabled = false;
-                form.SkipOrderEstimate.disabled = false;
-             }
-             else
-             {
-                e.style.display = 'none';
-                form.Format.disabled = true;
-                form.ForPublication.disabled = true;
-                form.ItemInfo3.disabled = true;
-                form.RequestType.disabled = true;
-                form.SkipOrderEstimate.disabled = true;
-             }
-          }
-      //-->
-    </script>
-    <link href="http://www.library.ucla.edu/css/wht.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>Aeon UCLA Library - Selected Items</title>
   </head>
-  <body bgcolor="#FFFFFF" topmargin="0" marginheight="0" marginwidth="0" leftmargin="0" width="960">
-    <!--body onLoad="javascript:dologout()"-->
-    <table width="960" cellpadding="0" cellspacing="0" align="center">
-      <tr>
-        <td width="165" bgcolor="#3283BE" align="center">
-          <img alt="UCLA Library logo" src="http://www.library.ucla.edu/sites/all/themes/uclalib_omega/logo.png" />
-        </td>
-        <td bgcolor="#3283BE" align="center">
-          <h1>
-            <font color="#ffffff" class="body"><b>Library Special Collections</b></font
-            ><br />
-          </h1>
-        </td>
-        <td width="155" bgcolor="#3283BE"></td>
-      </tr>
-      <tr>
-        <td colspan="2" align="center">Items Selected for Processing</td>
-      </tr>
-    </table>
 
-    <form
-      id="AeonRequest"
-      name="AeonRequest"
-      target="_self"
-      method="post"
-      action="https://speccoll.library.ucla.edu/logon"
-    >
-      <!--https://speccoll.library.ucla.edu/aeon/aeon.dll"-->
-      <!--form method="post" action="finalSubmit.jsp"-->
-      <input name="AeonForm" value="EADRequest" type="hidden" />
-      <c:set var="bibRecord" value="${bibSource.bibData}" />
-      <table align="center" width="960" border="0" cellpadding="3">
-        <tr>
-          <td>Author</td>
-          <td>${bibRecord.author}</td>
-        </tr>
-        <tr>
-          <td>Title</td>
-          <td>${bibRecord.title}</td>
-        </tr>
-        <tr>
-          <td>Call Number(s)</td>
-          <td>
-            <ul>
-              <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
-                <li>${yrl.callNo}</li>
-              </c:forEach>
-            </ul>
-          </td>
-        </tr>
-        <tr>
-          <td>Is this request for:</td>
-          <td>
-            <input
-              type="radio"
-              name="reqType"
-              id="reqType.1"
-              value="1"
-              checked="checked"
-              onclick="toggle_visibility('dupe',1);"
-            />
-            <label for="reqType.1">On-site review</label><br />
-            <input type="radio" name="reqType" id="reqType.2" value="2" onclick="toggle_visibility('dupe',2);" />
-            <label for="reqType.2">Duplication</label>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <div id="dupe" style="display: none;">
-              <table>
-                <tr>
-                  <td>
-                    <label for="Format">Format:</label>&nbsp;
-                    <select name="Format" id="Format" disabled="true">
-                      <option value="AV">Audio/video</option>
-                      <option value="PDF">PDF</option>
-                      <option value="TIFF">TIFF</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="checkbox" name="ForPublication" id="ForPublication" value="Yes" disabled="true" />
-                    <label for="ForPublication">For Publication?</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label for="ItemInfo3">Project Description</label><br />
-                    <textarea cols="50" rows="5" id="ItemInfo3" name="ItemInfo3" disabled="true"></textarea>
-                  </td>
-                </tr>
-              </table>
+  <body class="d-flex flex-column">
+    <section class="site-navbar">
+      <nav class="navbar navbar-light nav-primary">
+        <a href="#">
+          <div class="navbar-brand py-0">
+            <img src="images/ucla-library-logo-wht.svg" class="" alt="UCLA Library logo" />
+            <span class="site-title">Special Collections Request System</span>
+          </div>
+        </a>
+      </nav>
 
-              <input value="Copy" name="RequestType" id="RequestType" type="hidden" disabled="true" />
-              <input type="hidden" name="SkipOrderEstimate" id="SkipOrderEstimate" value="Yes" disabled="true" />
+      <nav class="nav nav-secondary flex-column flex-md-row pl-3 py-2">
+        <a class="nav-link" href="http://www.library.ucla.edu/special-collections" target="_blank"
+          >Special Collections Home</a
+        >
+        <a class="nav-link" href="https://catalog.library.ucla.edu/" target="_blank">UCLA Library Catalog</a>
+        <a class="nav-link" href="http://www.oac.cdlib.org/" target="_blank">Online Archive of California (OAC)</a>
+        <a
+          class="nav-link"
+          href="https://www.library.ucla.edu/special-collections/frequently-asked-questions-faq"
+          target="_blank"
+          >FAQs</a
+        >
+      </nav>
+    </section>
+
+    <main class="container my-5 flex-grow-1">
+      <h4 class="h4-blue mb-4">Items Selected for Processing</h4>
+      <form
+        id="AeonRequest"
+        name="AeonRequest"
+        target="_self"
+        method="post"
+        action="https://speccoll.library.ucla.edu/logon"
+        class="mt-5"
+      >
+        <!--https://speccoll.library.ucla.edu/aeon/aeon.dll"-->
+        <!--form method="post" action="finalSubmit.jsp"-->
+        <!-- Request Information -->
+        <section class="req-info">
+          <input name="AeonForm" value="EADRequest" type="hidden" />
+          <c:set var="bibRecord" value="${bibSource.bibData}" />
+          <!-- Table with 50-50 columns, Single header -->
+          <div class="table table-50-50">
+            <div class="t-title text-center text-white py-1">
+              Request Information
             </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <!--input type="submit" value="Submit Request"/-->
-            &nbsp;
-          </td>
-        </tr>
-      </table>
+            <!-- Start of row -->
+            <div class="t-row">
+              <div class="t-cell py-1 px-3 column-1">Author</div>
+              <div class="t-cell py-1 px-3 column-2">${bibRecord.author}</div>
+            </div>
+            <!-- End of row -->
+            <!-- Start of row -->
+            <div class="t-row">
+              <div class="t-cell py-1 px-3 column-1">Title</div>
+              <div class="t-cell py-1 px-3 column-2">${bibRecord.title}</div>
+            </div>
+            <!-- End of row -->
+            <!-- Start of row -->
+            <div class="t-row">
+              <div class="t-cell py-1 px-3 column-1">Call Number(s)</div>
+              <div class="t-cell py-1 px-3 column-2">
+                <ul>
+                  <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
+                    <li>${yrl.callNo}</li>
+                  </c:forEach>
+                </ul>
+              </div>
+            </div>
+            <!-- End of row -->
+          </div>
+          <!--End of table -->
+          <hr />
+        </section>
 
-      <input value="${param.specReq}" name="SpecialRequest" type="hidden" />
-      <input value="${param.notes}" name="notes" type="hidden" />
-      <c:choose>
-        <c:when test="${not empty param.theDate}">
-          <input name="ScheduledDate" type="hidden" value="${param.theDate}" />
-        </c:when>
-        <c:otherwise>
-          <input name="ScheduledDate" type="hidden" value="${param.textDate}" />
-        </c:otherwise>
-      </c:choose>
-      <c:choose>
-        <c:when test="${bibSource.isBio}">
-          <input name="Site" type="hidden" value="BIOMED" />
-        </c:when>
-        <c:otherwise>
-          <input name="Site" type="hidden" value="YRL" />
-        </c:otherwise>
-      </c:choose>
-      <input type="hidden" name="ItemAuthor" value="${bibRecord.author}" />
-      <input type="hidden" name="ItemDate" value="${bibRecord.pubDates}" />
-      <input type="hidden" name="SubmitButton" value="Submit Request" />
-      <input type="hidden" name="WebRequestForm" value="DefaultRequest" />
-      <c:choose>
-        <c:when test="${not empty bibRecord.srlfItems}">
-          <c:set var="index" value="-1" />
+        <!-- -->
+        <input value="${param.specReq}" name="SpecialRequest" type="hidden" />
+        <input value="${param.notes}" name="notes" type="hidden" />
+        <c:choose>
+          <c:when test="${not empty param.theDate}">
+            <input name="ScheduledDate" type="hidden" value="${param.theDate}" />
+          </c:when>
+          <c:otherwise>
+            <input name="ScheduledDate" type="hidden" value="${param.textDate}" />
+          </c:otherwise>
+        </c:choose>
 
-          <c:forEach var="srlf" items="${bibRecord.srlfItems}" begin="0" end="0">
-            <input value="${srlf.location}" name="Location" type="hidden" />
-          </c:forEach>
-          <table align="center" width="960" border="1" class="footer">
-            <tr>
-              <th width="25%">Item Description</th>
-              <th width="75%">Item Comment</th>
-            </tr>
-            <c:forEach var="srlf" items="${bibRecord.srlfItems}">
-              <tr>
-                <td width="75%">
-                  <label for="${srlf.itemEnum}">
-                    <c:if test="${not empty srlf.itemEnum}">
-                      ${srlf.itemEnum}&nbsp;|&nbsp;
-                    </c:if>
-                    <c:if test="${not empty srlf.chron}">
-                      ${srlf.chron}&nbsp;|&nbsp;
-                    </c:if>
-                    <c:if test="${(not empty srlf.copy) and (srlf.copy ne 0)}">
-                      Copy&nbsp;${srlf.copy}&nbsp;|&nbsp;
-                    </c:if>
-                    <c:if test="${not empty srlf.note}">
-                      ${srlf.note}&nbsp;|&nbsp;
-                    </c:if>
-                    <c:if test="${not empty srlf.oacDetails}">
-                      <br />
-                      ${srlf.oacDetails}
-                    </c:if>
-                    <c:if test="${not empty srlf.pickupLocale}">
-                      <br />
-                      ${srlf.pickupLocale}
-                    </c:if>
-                  </label>
-                  <c:set var="index" value="${index + 1}" />
-                  <input type="hidden" name="Request" value="${index}" />
-                  <input value="${bibRecord.title}" name="ItemTitle_${index}" type="hidden" />
-                  <input value="${srlf.itemEnum}" name="ItemVolume_${index}" type="hidden" />
-                  <input value="${param.bibID}" name="ReferenceNumber_${index}" type="hidden" />
-                  <input value="${srlf.barcode}" name="ItemNumber_${index}" type="hidden" />
-                  <input value="${srlf.copy}" name="ItemIssue_${index}" type="hidden" />
-                  <input value="${srlf.status}" name="ItemCitation_${index}" type="hidden" />
-                  <input type="hidden" name="CallNumber_${index}" value="${srlf.callNo}" />
-                </td>
-                <td width="25%">
-                  <textarea cols="50" rows="10" name="Notes" id="${srlf.itemEnum}">${srlf.itemEnum}:</textarea>
-                </td>
-              </tr>
+        <c:choose>
+          <c:when test="${bibSource.isBio}">
+            <input name="Site" type="hidden" value="BIOMED" />
+          </c:when>
+          <c:otherwise>
+            <input name="Site" type="hidden" value="YRL" />
+          </c:otherwise>
+        </c:choose>
+
+        <input type="hidden" name="ItemAuthor" value="${bibRecord.author}" />
+        <input type="hidden" name="ItemDate" value="${bibRecord.pubDates}" />
+        <input type="hidden" name="SubmitButton" value="Submit Request" />
+        <input type="hidden" name="WebRequestForm" value="DefaultRequest" />
+
+        <c:choose>
+          <c:when test="${not empty bibRecord.srlfItems}">
+            <c:set var="index" value="-1" />
+
+            <c:forEach var="srlf" items="${bibRecord.srlfItems}" begin="0" end="0">
+              <input value="${srlf.location}" name="Location" type="hidden" />
             </c:forEach>
-            <tr>
-              <td colspan="2">
-                <input type="submit" value="Submit Request" />
-              </td>
-            </tr>
-          </table>
-        </c:when>
-        <c:otherwise>
-          <input type="hidden" name="Request" value="0" />
-          <input value="${bibRecord.title}" name="ItemTitle_0" type="hidden" />
-          <input value="" name="ItemVolume_0" type="hidden" />
-          <input value="${param.bibID}" name="ReferenceNumber_0" type="hidden" />
-          <input value="" name="ItemNumber_0" type="hidden" />
-          <input value="" name="ItemIssue_0" type="hidden" />
-          <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
-            <c:if test="${not empty yrl.callNo}">
-              <input type="hidden" name="CallNumber_0" value="${yrl.callNo}" />
-            </c:if>
-          </c:forEach>
-          <br /><input type="submit" value="Submit Request" />
-        </c:otherwise>
-      </c:choose>
-    </form>
+
+            <!-- Requested Items -->
+            <section class="req-materials">
+              <!-- Table with 1 column at 100% -->
+              <div class="table table-100">
+                <!-- Start of table heading -->
+                <div class="t-heading text-center">
+                  <div class="t-cell py-2">Item Description</div>
+                </div>
+                <!-- End of table heading -->
+                <!-- Start of item display -->
+                <c:forEach var="srlf" items="${bibRecord.srlfItems}">
+                  <!-- Start of row -->
+                  <div class="t-row">
+                    <div class="t-cell py-1 px-3 column-2">
+                      <label for="${srlf.itemEnum}">
+                        <c:if test="${not empty srlf.itemEnum}">
+                          ${srlf.itemEnum}&nbsp;|&nbsp;
+                        </c:if>
+                        <c:if test="${not empty srlf.chron}">
+                          ${srlf.chron}&nbsp;|&nbsp;
+                        </c:if>
+                        <c:if test="${(not empty srlf.copy) and (srlf.copy ne 0)}">
+                          Copy&nbsp;${srlf.copy}&nbsp;|&nbsp;
+                        </c:if>
+                        <c:if test="${not empty srlf.note}">
+                          ${srlf.note}&nbsp;|&nbsp;
+                        </c:if>
+                        <c:if test="${not empty srlf.oacDetails}">
+                          <br />
+                          ${srlf.oacDetails}
+                        </c:if>
+                        <c:if test="${not empty srlf.pickupLocale}">
+                          <br />
+                          ${srlf.pickupLocale}
+                        </c:if>
+                      </label>
+                      <c:set var="index" value="${index + 1}" />
+                      <input type="hidden" name="Request" value="${index}" />
+                      <input value="${bibRecord.title}" name="ItemTitle_${index}" type="hidden" />
+                      <input value="${srlf.itemEnum}" name="ItemVolume_${index}" type="hidden" />
+                      <input value="${param.bibID}" name="ReferenceNumber_${index}" type="hidden" />
+                      <input value="${srlf.barcode}" name="ItemNumber_${index}" type="hidden" />
+                      <input value="${srlf.copy}" name="ItemIssue_${index}" type="hidden" />
+                      <input value="${srlf.status}" name="ItemCitation_${index}" type="hidden" />
+                      <input type="hidden" name="CallNumber_${index}" value="${srlf.callNo}" />
+                    </div>
+                  </div>
+                  <!-- End of row -->
+                </c:forEach>
+              </div>
+              <!--End of table-10-90 -->
+              <hr />
+            </section>
+            <input type="submit" value="Submit Request" />
+          </c:when>
+          <c:otherwise>
+            <input type="hidden" name="Request" value="0" />
+            <input value="${bibRecord.title}" name="ItemTitle_0" type="hidden" />
+            <input value="" name="ItemVolume_0" type="hidden" />
+            <input value="${param.bibID}" name="ReferenceNumber_0" type="hidden" />
+            <input value="" name="ItemNumber_0" type="hidden" />
+            <input value="" name="ItemIssue_0" type="hidden" />
+            <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
+              <c:if test="${not empty yrl.callNo}">
+                <input type="hidden" name="CallNumber_0" value="${yrl.callNo}" />
+              </c:if>
+            </c:forEach>
+            <br /><input type="submit" value="Submit Request" />
+          </c:otherwise>
+        </c:choose>
+      </form>
+    </main>
+
+    <footer class="p-4">
+      <small class="text-white">Copyright &copy; 2019 UC Regents. All Rights Reserved.</small>
+    </footer>
+
+    <script src="js/toggle.js" type="text/javascript" language="JavaScript"></script>
   </body>
 </html>
