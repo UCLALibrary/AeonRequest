@@ -3,6 +3,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.css" />
@@ -11,64 +12,63 @@
     <title>Aeon - Submit a UCLA Library Special Collections Request</title>
   </head>
   <body>
-    <nav>
-      <div class="nav-primary">
-        <img src="images/ucla-library-logo-wht.svg" alt="UCLA Library Logo" />
-        <span class="navbar-pipe"></span>
-        <span class="text-logo-title">Special Collections Request System</span>
-      </div>
-      <div class="nav-secondary">
-        <ul class="nav-links">
-          <li>Special Collections Home</li>
-          <li>UCLA Library Catalog</li>
-          <li>Online Archive of California (OAC)</li>
-          <li>FAQs</li>
-        </ul>
-      </div>
-    </nav>
+    <section class="site-navbar">
+      <nav class="navbar navbar-light nav-primary">
+        <a href="#">
+          <div class="navbar-brand py-0">
+            <img src="images/ucla-library-logo-wht.svg" class="" alt="UCLA Library logo" />
+            <span class="site-title">Special Collections Request System</span>
+          </div>
+        </a>
+      </nav>
+
+      <nav class="nav nav-secondary flex-column flex-md-row pl-3 py-2">
+        <a class="nav-link" href="http://www.library.ucla.edu/special-collections" target="_blank"
+          >Special Collections Home</a
+        >
+        <a class="nav-link" href="https://catalog.library.ucla.edu/" target="_blank">UCLA Library Catalog</a>
+        <a class="nav-link" href="http://www.oac.cdlib.org/" target="_blank">Online Archive of California (OAC)</a>
+        <a
+          class="nav-link"
+          href="https://www.library.ucla.edu/special-collections/frequently-asked-questions-faq"
+          target="_blank"
+          >FAQs</a
+        >
+      </nav>
+    </section>
 
     <main class="container my-5">
-      <section class="welcome shadow-sm rounded p-md-5 p-4">
+      <section class="pg-welcome shadow-sm rounded p-md-5 p-4">
         <p>
-          Special Collections materials do not circulate and can only be
-          consulted in one of our reading rooms.
+          Special Collections materials do not circulate and can only be consulted in one of our reading rooms.
         </p>
         <ul>
           <li>
-            Research Library Special Collections materials are accessed in the
-            Ahmanson-Murphy reading room.
+            Research Library Special Collections materials are accessed in the Ahmanson-Murphy reading room.
           </li>
           <li>
-            History and Special Collections for the Sciences materials are
-            accessed in the Biomedical Library History and Special Collections
-            for Medicine and the Sciences reading room.
+            History and Special Collections for the Sciences materials are accessed in the Biomedical Library History
+            and Special Collections for Medicine and the Sciences reading room.
           </li>
         </ul>
         <p>
-          Please select your requested materials and provide a date for your
-          research visit. We do not accept appointments and we are unable to
-          guarantee seating arrangements.
+          Please select your requested materials and provide a date for your research visit. We do not accept
+          appointments and we are unable to guarantee seating arrangements.
         </p>
         <p>
           Due to space constraints, the following paging limits are enforced:
         </p>
         <ul>
           <li>
-            <strong
-              >Retrieval of off-site holdings is limited to 5 boxes/items per
-              day</strong
-            >
+            <b>Retrieval of off-site holdings is limited to 5 boxes/items per day</b>
           </li>
           <li>
-            <strong
-              >Retrieval of on-site holdings is limited to 5 boxes/items per
-              hour</strong
-            >
+            <b>Retrieval of on-site holdings is limited to 5 boxes/items per hour</b>
           </li>
         </ul>
         <p>
-          If you would like to see the material in a particular order, please
-          indicate this in the <strong>“Special Requests”</strong> field.
+          If you would like to see the material in a particular order, please indicate this in the
+          <strong>“Special Requests”</strong> field.
         </p>
         <p>
           You can review your selections by clicking the
@@ -79,7 +79,7 @@
 
       <form id="AeonRequest" class="mt-5">
         <!-- Request Information -->
-        <section class="req-info py-4">
+        <section class="req-info">
           <!-- Table with 50-50 columns, Single header -->
           <div class="table table-50-50">
             <div class="t-title text-center text-white py-1">
@@ -105,11 +105,11 @@
             <!-- End of row -->
           </div>
           <!--End of table -->
+          <hr />
         </section>
-        <hr />
 
         <!-- Request Material -->
-        <section class="req-materials py-4">
+        <section class="req-materials">
           <!-- Table with column 1 at 10%, column 2 at 90% -->
           <div class="table table-12-88">
             <!-- Start of table heading -->
@@ -122,9 +122,8 @@
             <div class="t-row">
               <div class="t-cell py-1 text-center column-1">Box1</div>
               <div class="t-cell py-1 px-3 column-2">
-                Requested item description Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Commodi cum nihil velit atque quos
-                a dolores ea asperiores doloremque corrupti.
+                Requested item description Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi cum nihil
+                velit atque quos a dolores ea asperiores doloremque corrupti.
               </div>
             </div>
             <!-- End of row -->
@@ -154,23 +153,24 @@
             <!-- End of row -->
           </div>
           <!--End of table-10-90 -->
+          <hr />
         </section>
-        <hr />
 
         <!-- Request type -->
-        <section class="req-type py-4">
+        <section class="req-type">
           <h4 class="h4-blue mb-4">Select Request Type</h4>
           <div class="req-type-row">
-            <div class="req-type-box mr-md-3">
+            <div class="req-type-box">
               <input
                 type="radio"
                 name="reqType"
                 id="reqType.1"
                 value="1"
                 checked="checked"
+                class=""
                 onclick="toggle_visibility('dupe', 'visit',1);"
               />
-              <label for="reqType.1">On-site review</label>
+              <label for="reqType.1" class="">On-site review</label>
               <p><em>Request item for Reading Room use</em></p>
             </div>
             <div class="req-type-box">
@@ -186,77 +186,48 @@
             </div>
           </div>
 
-          <div id="dupe" class="mt-4 toggled-box">
+          <div id="dupe" class="mt-4 p-4 toggled-box">
             <p>
-              Duplication requests are processed in the order received and
-              generally take 2-4 weeks to complete. Duplication Services staff
-              will contact you to confirm your request when your order is ready
-              to be processed. <br /><br />
-              To view our fee schedule and policies, please visit:
-              http://library.ucla.edu/use/access-privileges/print-copy-scan/special-collections-reproductions
+              Duplication requests are processed in the order received and generally take 2-4 weeks to complete.
+              Duplication Services staff will contact you to confirm your request when your order is ready to be
+              processed.
             </p>
-            <label for="Format">Format:</label><br />
+            <p class="mb-3 mb-md-4">
+              To view our fee schedule and policies, please visit:
+              <a
+                href="http://library.ucla.edu/use/access-privileges/print-copy-scan/special-collections-reproductions"
+                target="_blank"
+                >http://library.ucla.edu/use/access-privileges/print-copy-scan/special-collections-reproductions</a
+              >
+            </p>
+            <label for="Format"><h5 class="h5-blue">Format:</h5></label><br />
             <!-- <select name="Format" id="Format" disabled="true">
               <option value="AV">Audio/video</option>
               <option value="PDF">PDF</option>
               <option value="TIFF">TIFF</option>
             </select> -->
             <div class="input-row">
-              <span
-                ><input type="radio" name="reqType" id="reqType.2" value="AV" />
-                <label>Audio / Video</label></span
-              >
-              <span
-                ><input
-                  type="radio"
-                  name="reqType"
-                  id="reqType.2"
-                  value="PDF"
-                />
-                <label>PDF</label></span
-              >
-              <span
-                ><input
-                  type="radio"
-                  name="reqType"
-                  id="reqType.2"
-                  value="TIFF"
-                />
-                <label>TIFF</label></span
-              >
+              <span><input type="radio" name="reqType" id="reqType.2" value="AV" /> <label>Audio / Video</label></span>
+              <span><input type="radio" name="reqType" id="reqType.2" value="PDF" /> <label>PDF</label></span>
+              <span><input type="radio" name="reqType" id="reqType.2" value="TIFF" /> <label>TIFF</label></span>
             </div>
             <hr />
-            <br />
-            <input
-              type="checkbox"
-              name="ForPublication"
-              id="ForPublication"
-              value="Yes"
-              disabled="true"
-            />
+            <input type="checkbox" name="ForPublication" id="ForPublication" value="Yes" />
             <label for="ForPublication">For Publication?</label>
             <hr />
-            <br />
-
             <label for="ItemInfo3">Project Description</label><br />
-            <textarea
-              cols="50"
-              rows="5"
-              id="ItemInfo3"
-              name="ItemInfo3"
-              disabled="true"
-            ></textarea>
+            <textarea cols="45" rows="5" id="ItemInfo3" name="ItemInfo3" disabled="true"></textarea>
           </div>
+          <hr />
         </section>
-        <hr />
 
         <!-- Date of visit -->
-        <section class="req-date py-4" id="visit" name="Visit">
+        <section class="req-date" id="visit" name="Visit">
           <h4 class="h4-blue">Select Date of Visit</h4>
           <p class="text-danger pb-0 mb-0"><em>Required</em></p>
           <p>
-            We cannot accommodate same day requests for off-site materials.
-            Please allow at least 3 days for retrieval of off-site materials.
+            We cannot accommodate same day requests for off-site materials. Please allow at least 3 days for retrieval
+            of off-site materials.
           </p>
           <div class="req-date-row text-center">
             <div class="date-box date-picker pl-3 pt-3">
@@ -265,45 +236,36 @@
             <p class="mid-col pt-3"><b>OR</b></p>
             <div class="date-box date-input pl-3 pt-3">
               <p>Enter your preferred date</p>
-              <input
-                name="textDate"
-                id="textDate"
-                value=""
-                onchange="clearRadioDates();"
-                placeholder="MM/DD/YYYY"
-              />
+              <input name="textDate" id="textDate" value="" onchange="clearRadioDates();" placeholder="MM/DD/YYYY" />
             </div>
           </div>
           <hr />
         </section>
 
         <!-- Special requests -->
-        <section class="req-notes py-4">
+        <section class="req-notes">
           <h4 class="h4-blue">Special Requests</h4>
           <p class="text-muted pb-0 mb-0"><em>Optional</em></p>
           <label class="pt-0 pb-2" for="specReq">
-            Please enter any special requests or questions you have for library
-            staff.</label
+            Please enter any special requests or questions you have for library staff.</label
           ><br />
           <textarea
-            cols="50"
+            cols="45"
             rows="5"
             name="specReq"
             id="specReq"
             maxlength="255"
             placeholder="Maximum 255 characters"
           ></textarea>
+          <hr />
         </section>
 
-        <hr />
         <input type="submit" value="Confirm Request" />
       </form>
     </main>
 
     <footer class="p-4">
-      <small class="text-white"
-        >Copyright <span>©</span> 2019 UC Regents. All Rights Reserved.</small
-      >
+      <small class="text-white">Copyright &copy; 2019 UC Regents. All Rights Reserved.</small>
     </footer>
   </body>
 </html>

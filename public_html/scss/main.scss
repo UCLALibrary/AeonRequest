@@ -4,14 +4,6 @@
 @import "./req-dates";
 @import "./req-type";
 
-@mixin placeholder-style() {
-  font-size: 0.875rem;
-  font-style: italic;
-  opacity: 0.8;
-  padding-top: 10px;
-  padding-left: 10px;
-}
-
 *,
 *::before,
 *::after {
@@ -26,6 +18,8 @@ html {
 
 hr {
   border-top: 1px solid $ucla-lightest-blue;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 ::placeholder {
@@ -44,17 +38,39 @@ hr {
 }
 
 textarea {
-  border: 1px solid $ucla-blue;
+  @include box-border-style;
+}
+@media (max-width: 768px) {
+  textarea {
+    width: 100%;
+  }
 }
 
 // Typography
-.h4-blue {
+.h4-blue,
+.h5-blue {
   color: $ucla-darker-blue;
   font-weight: 600;
 }
 
-.welcome {
+.pg-welcome {
   background-color: $off-white;
+}
+
+a {
+  color: $ucla-darker-blue;
+}
+
+@media (max-width: 768px) {
+  .welcome {
+    p,
+    ul {
+      font-size: 14px;
+    }
+  }
+  .h4-blue {
+    font-size: 20px;
+  }
 }
 
 input[type="submit"] {
@@ -63,18 +79,18 @@ input[type="submit"] {
   color: #fff;
   font-weight: 500;
   font-size: 16px;
-  border: 1px solid $ucla-darker-blue;
+  @include box-border-style;
 }
 
 input[type="submit"]:hover {
-  border: 1px solid #005587;
   background: #fff;
   color: #005587;
   cursor: pointer;
+  @include box-border-style;
   transition: all 0.3s ease-in-out;
 }
 
 footer {
   background-color: $ucla-blue;
-  margin-top: 5rem;
+  margin-top: 6.25rem;
 }

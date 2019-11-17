@@ -3,9 +3,7 @@
 // All Tables
 .table {
   display: table;
-  // max-width: 900px;
   width: 100%;
-  // margin: 0 auto;
   border: 1px solid $ucla-blue;
 
   .t-title {
@@ -44,6 +42,14 @@
 
   .t-row:nth-child(even) {
     background-color: $gray;
+  }
+}
+
+@media (max-width: 768px) {
+  .table {
+    .t-title {
+      font-size: 16px;
+    }
   }
 }
 

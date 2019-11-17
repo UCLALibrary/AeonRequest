@@ -7,9 +7,8 @@
   .date-box {
     min-height: 200px;
     max-width: 400px;
-    margin: 0 auto;
     border-radius: 2px;
-    border: 1px solid $ucla-blue;
+    @include box-border-style;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -20,6 +19,7 @@
   }
   .mid-col {
     color: $black;
+    max-width: 400px;
   }
   input {
     height: max-content;
@@ -34,7 +34,7 @@
       margin: 0;
     }
     .mid-col {
-      width: 50px;
+      width: 100px;
     }
   }
 }

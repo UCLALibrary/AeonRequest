@@ -1,6 +1,7 @@
 @import "./variables";
 
-input[type="radio"] {
+input[type="radio"],
+input[type="checkbox"] {
   margin-right: 1rem;
 }
 
@@ -9,18 +10,14 @@ input[type="radio"] {
     min-width: 300px;
     max-width: 350px;
     width: 100%;
-    border: 1px solid #005587;
+    @include box-border-style;
     border-radius: 3px;
     padding: 20px 10px 10px 20px;
     margin-top: 1rem;
-
-    // input[type="radio"] {
-    //   margin-right: 1rem;
-    // }
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .req-type-row {
     display: flex;
     justify-content: space-between;
@@ -38,6 +35,11 @@ input[type="radio"] {
 .toggled-box {
   max-width: 800px;
   background: $gray;
+  a {
+    color: $ucla-darker-blue;
+    text-decoration: underline;
+  }
+
   .input-row {
     display: flex;
     justify-content: space-between;

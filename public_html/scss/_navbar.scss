@@ -1,86 +1,53 @@
-@import "./variables";
+// @import "./variables";
 
-nav {
-  overflow: hidden;
+.site-navbar {
   .nav-primary {
     background-color: $ucla-blue;
     height: 65px;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    position: relative;
+
     img {
-      max-width: 180px;
+      max-width: 150px;
     }
-    .text-logo-title {
-      margin-bottom: 0;
-      position: relative;
-      top: 3px;
-      left: -3px;
-      font-size: 19px;
+
+    .site-title {
+      font-size: 16px;
       font-weight: 600;
       color: #fff;
-      letter-spacing: 0.25;
-    }
-    .navbar-pipe::after {
-      content: "|";
       position: relative;
-      left: -10px;
-      top: 3px;
-      font-weight: 300;
-      color: #8bb8e8;
+      top: 0.25rem;
+      left: -1rem;
     }
   }
+
   .nav-secondary {
-    background-color: #ffd100;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    .nav-links {
-      display: flex;
-      justify-content: space-around;
-      max-width: 900px;
-      width: 100%;
-      padding-left: 0;
-      margin-left: -15px;
-      margin-bottom: 0;
-      color: #000;
-      font-family: Helvetica;
-      font-size: 16px;
-      line-height: 24px;
-      li {
-        list-style: none;
-        line-height: 1.4em;
+    background-color: $ucla-gold;
+
+    a {
+      color: $black;
+      font-weight: 500;
+      position: relative;
+
+      &::after {
+        content: " ";
+        position: absolute;
+        bottom: 0.5rem;
+        left: 1rem;
+        right: 100%;
+        border-bottom: 0.2em solid $ucla-blue;
+        transition: right 0.4s cubic-bezier(0, 0.5, 0, 1);
+      }
+
+      &:hover::after {
+        right: 0%;
       }
     }
   }
 }
 
 @media (max-width: 768px) {
-  nav {
-    .nav-primary {
-      flex-direction: column;
-      align-items: baseline;
-      justify-content: center;
-      position: static;
-      height: 100px;
-      .navbar-pipe::after {
-        display: none;
-      }
-      .text-logo-title {
-        left: 16px;
-        top: -8px;
-      }
-    }
-    .nav-secondary {
-      .nav-links {
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: left;
-        min-height: 80px;
-        width: 100%;
-        margin-left: 16px;
-        padding-left: 0;
-      }
+  .nav-secondary {
+    a {
+      width: max-content;
     }
   }
 }
