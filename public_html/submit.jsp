@@ -207,5 +207,6 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     </footer>
 
     <script src="js/toggle.js" type="text/javascript" language="JavaScript"></script>
+    <script src="js/validateForm.js" type="text/javascript" language="JavaScript"></script>
   </body>
 </html>
