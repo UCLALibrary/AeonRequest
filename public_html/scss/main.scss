@@ -1,0 +1,96 @@
+@import "./variables";
+@import "./tables";
+@import "./navbar";
+@import "./req-dates";
+@import "./req-type";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-family: Helvetica, sans-serif;
+  color: $black;
+}
+
+hr {
+  border-top: 1px solid $ucla-lightest-blue;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  @include placeholder-style;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  @include placeholder-style;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  @include placeholder-style;
+}
+
+textarea {
+  @include box-border-style;
+}
+@media (max-width: 768px) {
+  textarea {
+    width: 100%;
+  }
+}
+
+// Typography
+.h4-blue,
+.h5-blue {
+  color: $ucla-darker-blue;
+  font-weight: 600;
+}
+
+.pg-welcome {
+  background-color: $off-white;
+}
+
+a {
+  color: $ucla-darker-blue;
+}
+
+@media (max-width: 768px) {
+  .welcome {
+    p,
+    ul {
+      font-size: 14px;
+    }
+  }
+  .h4-blue {
+    font-size: 20px;
+  }
+}
+
+input[type="submit"] {
+  padding: 12px 30px;
+  background: $ucla-darker-blue;
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  @include box-border-style;
+}
+
+input[type="submit"]:hover {
+  background: #fff;
+  color: #005587;
+  cursor: pointer;
+  @include box-border-style;
+  transition: all 0.3s ease-in-out;
+}
+
+footer {
+  background-color: $ucla-blue;
+  margin-top: 6.25rem;
+}

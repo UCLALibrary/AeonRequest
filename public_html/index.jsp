@@ -11,322 +11,394 @@
 
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
-    <link href="http://www.library.ucla.edu/css/wht.css" rel="stylesheet" type="text/css">
-    <title>Aeon - Submit a UCLA Library Special Collections Request</title>
-    <script language="javascript" type="text/javascript">
-      <!--
-        function validateForm(formObj)
-        {
-          var customDate = 0;
-          var selectedDate = 0;
-          var pattern = /\d{2}\/\d{2}\/\d{4}/;
-          
-          for ( var i = 0; i < formObj.theDate.length; i++ )
-          {
-            if ( formObj.theDate[i].checked )
-              selectedDate += 1;
-          }
-          
-          if ( formObj.textDate.value.replace(/^(\s+)/,"").replace(/(\s+)$/,"") != "" )
-          {
-            if ( !pattern.test( formObj.textDate.value ) )
-            {
-              alert( "The date value must be in MM/DD/YYYY format" );
-              formObj.textDate.select();
-              formObj.textDate.focus();
-              return false;
-            }
-            else
-              customDate += 1;
-          }
-          
-          if ( ( customDate > 0 ) || ( selectedDate > 0 ) )
-            return true;
-          else
-          {
-            alert( "You must either select a listed date or enter a desired date for your visit" );
-            return false;
-          }
-        }
-
-        function clearRadioDates()
-        {
-          var formObj = document.getElementById("bibForm");
-          var textDate = document.getElementById("textDate").value;
-          
-          if ( textDate != "" )
-          {
-            for ( i = 0; i < formObj.theDate.length; i++ )
-            {
-              formObj.theDate[ i ].checked = false;
-            }
-          }
-        }
-      -->
-    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>Aeon UCLA Library - Submit a Special Collections Request</title>
   </head>
-  <body bgcolor="#FFFFFF" topmargin="0" marginheight="0" marginwidth="0" leftmargin="0" width="960">
-    <table width="960" cellpadding="0" cellspacing="0" align="center">
-      <tr>
-        <td width="165" bgcolor="#3283BE" align="center">
-          <img alt="UCLA Library Logo" src="http://www.library.ucla.edu/sites/all/themes/uclalib_omega/logo.png">
-        </td>
-        <td bgcolor="#3283BE" align="center">
-         <h1><font color="#ffffff" class="body"><b>Library Special Collections</b></font><br/></h1>
-        </td>
-        <td  width="155" bgcolor="#3283BE">
-        </td>
-      </tr>
-      </tr>
-    </table>
-    <table align="center" width="960" border="1" class="footer">
-      <tr>
-        <td>
-          Welcome to UCLA Library Special Collections.  Thank you for your 
-          interest in our holdings.  Below are the details of the material you 
-          are considering including which location you will go to view the 
-          material.  There are two possible locations: Louise M. Darling 
-          Biomedical Library and Charles E. Young Research Library. All of our 
-          material is non-circulating and cannot be transferred between the 
-          Reading Rooms.<br/><br/>
-          You may select as many items as you like, but be aware there is a 
-          daily limit of 5 items per researcher for material retrieved from 
-          off-site storage.<br/><br/>
-          <!--b>If this is your <em>first</em> time using this system:<br/> 
-          Before you proceed with your request, please 
-          follow this link to create a user account with Library Special 
-          Collections: <a href="https://speccoll.library.ucla.edu/logon" target="_blank">Aeon registration</a></b> When 
-          you click on this link, a registration page will open up in a new tab, 
-          please follow instructions on that page. You may then proceed below 
-          with paging material from Library Special Collections.<br/-->
-          If you would like to see the material in a particular order, please 
-          indicate so in the “Notes” area.<br/><br/>
-          Please review your selections before clicking the “Submit Request” 
-          button and note the location listed.
-        </td>
-      </tr>
-    </table>
-    <br/>
-    <c:set var="bibRecord" value="${bibSource.bibData}"/>
-    <form action="submit.jsp" id="bibForm" method="POST" onsubmit="JavaScript:return validateForm(this);">
-      <input type="hidden" name="bibID" value="${param.bibID}"/>
-      <table align="center" width="960" border="0" cellpadding="3">
-        <tr>
-          <td>Record ID</td>
-          <td>${param.bibID}</td>
-        </tr>
-        <tr>
-          <td>Author</td>
-          <td>${bibRecord.author}</td>
-        </tr>
-        <tr>
-          <td>Title</td>
-          <td>${bibRecord.title}</td>
-        </tr>
-        <tr>
-          <td>Dates</td>
-          <td>${bibRecord.pubDates}</td>
-        </tr>
-        <c:if test="${not empty bibRecord.marc246}">
-          <tr>
-            <td>Collection Title</td>
-            <td>${bibRecord.marc246}</td>
-          </tr>
-        </c:if>
-        <c:if test="${not empty bibRecord.marc506}">
-          <tr>
-            <td>Restrictions on Access</td>
-            <td>${bibRecord.marc506}</td>
-          </tr>
-        </c:if>
-        <c:if test="${not empty bibRecord.marc524}">
-          <tr>
-            <td>Preferred Citation</td>
-            <td>${bibRecord.marc524}</td>
-          </tr>
-        </c:if>
-        <c:if test="${not empty bibRecord.marc590}">
-          <tr>
-            <td>Local Note</td>
-            <td>${bibRecord.marc590}</td>
-          </tr>
-        </c:if>
-        <tr>
-          <td>Call Number(s)</td>
-          <td>
-            <ul>
-              <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
-                <li style="list-style-type: none;">
-                  <c:if test="${not empty yrl.callNo}">
-                    ${yrl.callNo}
-                  </c:if>
-                </li>
+
+  <body class="d-flex flex-column">
+    <section class="site-navbar">
+        <nav class="navbar navbar-light nav-primary">
+          <a href="#">
+            <div class="navbar-brand py-0">
+              <img src="images/ucla-library-logo-wht.svg" class="" alt="UCLA Library logo" />
+              <span class="site-title">Special Collections Request System</span>
+            </div>
+          </a>
+        </nav>
+
+        <nav class="nav nav-secondary flex-column flex-md-row pl-3 py-2">
+          <a class="nav-link" href="http://www.library.ucla.edu/special-collections" target="_blank"
+            >Special Collections Home</a
+          >
+          <a class="nav-link" href="https://catalog.library.ucla.edu/" target="_blank">UCLA Library Catalog</a>
+          <a class="nav-link" href="http://www.oac.cdlib.org/" target="_blank">Online Archive of California (OAC)</a>
+          <a
+            class="nav-link"
+            href="https://www.library.ucla.edu/special-collections/frequently-asked-questions-faq"
+            target="_blank"
+            >FAQs</a
+          >
+        </nav>
+    </section>
+
+    <main class="container my-5 flex-grow-1">
+      <section class="pg-welcome shadow-sm rounded p-md-5 p-4">
+          <p>
+            Special Collections materials do not circulate and can only be consulted in one of our reading rooms.
+          </p>
+          <ul>
+            <li>
+              Research Library Special Collections materials are accessed in the Ahmanson-Murphy reading room.
+            </li>
+            <li>
+              History and Special Collections for the Sciences materials are accessed in the Biomedical Library History
+              and Special Collections for Medicine and the Sciences reading room.
+            </li>
+          </ul>
+          <p>
+            Please select your requested materials and provide a date for your research visit. We do not accept
+            appointments and we are unable to guarantee seating arrangements.
+          </p>
+          <p>
+            Due to space constraints, the following paging limits are enforced:
+          </p>
+          <ul>
+            <li>
+              <b>Retrieval of off-site holdings is limited to 5 boxes/items per day</b>
+            </li>
+            <li>
+              <b>Retrieval of on-site holdings is limited to 5 boxes/items per hour</b>
+            </li>
+          </ul>
+          <p>
+            If you would like to see the material in a particular order, please indicate this in the
+            <strong>“Special Requests”</strong> field.
+          </p>
+          <p>
+            You can review your selections by clicking the
+            <strong>“Confirm Request”</strong>
+            button.
+          </p>
+      </section>
+
+      <c:set var="bibRecord" value="${bibSource.bibData}"/>
+      <form action="submit.jsp" id="bibForm" method="POST" onsubmit="JavaScript:return validateForm(this);">
+        <input type="hidden" name="bibID" value="${param.bibID}"/>
+        <!-- Request Information -->
+        <section class="req-info">
+            <!-- Table with 50-50 columns, Single header -->
+            <div class="table table-50-50">
+              <div class="t-title text-center text-white py-1">
+                Request Information
+              </div>
+              <!-- Start of row -->
+              <div class="t-row">
+                <div class="t-cell py-1 px-3 column-1">Call Number(s)</div>
+                <div class="t-cell py-1 px-3 column-2">
+                  <ul>
+                    <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
+                      <li style="list-style-type: none;">
+                        <c:if test="${not empty yrl.callNo}">
+                          ${yrl.callNo}
+                        </c:if>
+                      </li>
+                    </c:forEach>
+                  </ul>
+                </div>
+              </div>
+              <!-- End of row -->
+              <!-- Start of row -->
+              <div class="t-row">
+                <div class="t-cell py-1 px-3 column-1">Author</div>
+                <div class="t-cell py-1 px-3 column-2">${bibRecord.author}</div>
+              </div>
+              <!-- End of row -->
+              <!-- Start of row -->
+              <div class="t-row">
+                <div class="t-cell py-1 px-3 column-1">Title</div>
+                <div class="t-cell py-1 px-3 column-2">${bibRecord.title}</div>
+              </div>
+              <!-- End of row -->
+              <!-- Start of row -->
+              <div class="t-row">
+                <div class="t-cell py-1 px-3 column-1">Dates</div>
+                <div class="t-cell py-1 px-3 column-2">${bibRecord.pubDates}</div>
+              </div>
+              <!-- End of row -->
+              <!-- Start of row -->
+              <div class="t-row">
+                <div class="t-cell py-1 px-3 column-1">Location</div>
+                <div class="t-cell py-1 px-3 column-2">???</div>
+              </div>
+              <!-- End of row -->
+            </div>
+            <!--End of table -->
+            <hr />
+        </section>
+
+        <c:choose>
+          <c:when test="${not empty bibRecord.srlfItems}">
+        <!-- Request Material -->
+        <section class="req-materials">
+          <!-- Table with column 1 at 10%, column 2 at 90% -->
+              <div class="table table-12-88">
+                <!-- Start of table heading -->
+                <div class="t-heading text-center">
+                  <div class="t-cell py-2"><small>Select</small></div>
+                  <div class="t-cell py-2">Item Description</div>
+                </div>
+                <!-- End of table heading -->
+                <c:forEach var="srlf" items="${bibRecord.srlfItems}">
+                <!-- Start of row -->
+                <div class="t-row">
+                  <div class="t-cell py-1 text-center column-1">
+                    <%--input type="checkbox" name="itemID" id="item.${srlf.itemID}" value="${srlf.itemID}"/--%>
+                    <c:choose>
+                      <c:when test="${not empty srlf.itemID}">
+                        <input type="checkbox" name="itemID" id="item.${srlf.itemID}" value="${srlf.itemID}"/>
+                      </c:when>
+                      <c:otherwise>
+                        <input type="checkbox" name="itemID" id="item.${srlf.callNo}" value="${srlf.callNo}"/>
+                      </c:otherwise>
+                    </c:choose>
+                    <%--c:if test="${(not empty srlf.statusID) and (srlf.statusID ne 1)}">
+                      <br/>
+                      (${srlf.status}; There may be a delay in retrieval)
+                    </c:if--%>
+                  </div>
+                  <div class="t-cell py-1 px-3 column-2">
+                    <label for="item.${srlf.itemID}">
+                      <c:if test="${not empty srlf.itemEnum}">
+                        ${srlf.itemEnum}&nbsp;|&nbsp;
+                      </c:if>
+                      <c:if test="${not empty srlf.chron}">
+                        ${srlf.chron}&nbsp;|&nbsp;
+                      </c:if>
+                      <c:if test="${(not empty srlf.copy) and (srlf.copy ne 0)}">
+                        Copy&nbsp;${srlf.copy}&nbsp;|&nbsp;
+                      </c:if>
+                      <c:if test="${not empty srlf.note}">
+                        ${srlf.note}&nbsp;|&nbsp;
+                      </c:if>
+                      <c:if test="${not empty srlf.callNo}">
+                        ${srlf.callNo}&nbsp;|&nbsp;
+                      </c:if>
+                      <c:if test="${not empty srlf.freeText}">
+                        ${srlf.freeText}&nbsp;|&nbsp;
+                      </c:if>
+                      <c:if test="${not empty srlf.oacDetails}">
+                        <br/>
+                        ${srlf.oacDetails}
+                      </c:if>
+                      <c:if test="${not empty srlf.pickupLocale}">
+                        <br/>
+                        ${srlf.pickupLocale}
+                      </c:if>
+                    </label>
+                  </div>
+                </div>
+                <!-- End of row -->
               </c:forEach>
-            </ul>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="specReq">Special Requests/Questions?<br/>
-            Please enter any special requests or questions you have for library staff.</label>
-          </td>
-          <td>
-            <textarea cols="50" rows="5" name="specReq" id="specReq" placeholder="maximum 255 characters"></textarea>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="Notes">My Notes:<br/>
-            enter any notes about this request for your personal reference.</label>
-          </td>
-          <td>
-            <textarea cols="50" rows="5" name="Notes" id="Notes"></textarea>
-          </td>
-        </tr>
-        <jsp:useBean id="dateGetter"
-                     class="edu.ucla.library.libservices.aeon.vger.utility.AvailableDates">
-          <c:choose>
-            <c:when test="${bibSource.isBio}">
-              <jsp:setProperty name="dateGetter" property="unitID" value='<%= application.getInitParameter("unitid.biohis") %>'/>
-            </c:when>
-            <c:otherwise>
-              <jsp:setProperty name="dateGetter" property="unitID" value='<%= application.getInitParameter("unitid.yrlspc") %>'/>
-            </c:otherwise>
-          </c:choose>
-          <%--jsp:setProperty name="dateGetter" property="dbName" value='<%= application.getInitParameter("datasource.hours") %>'/--%>
-        </jsp:useBean>
+              </div>
+              <!--End of table-10-90 -->
+              <hr />
+              
+        </section>
+
+        <!-- Request Type -->
+        <section class="req-type">
+            <h4 class="h4-blue mb-4">Select Request Type</h4>
+            <div class="req-type-row">
+              <div class="req-type-box">
+                <input
+                  type="radio"
+                  name="reqType"
+                  id="reqType.1"
+                  value="1"
+                  checked="checked"
+                  class=""
+                  onclick="toggle_visibility('dupe', 'visit',1);"
+                />
+                <label for="reqType.1" class="">On-site review</label>
+                <p><em>Request item for Reading Room use</em></p>
+              </div>
+              <div class="req-type-box">
+                <input
+                  type="radio"
+                  name="reqType"
+                  id="reqType.2"
+                  value="2"
+                  onclick="toggle_visibility('dupe', 'visit',2);"
+                />
+                <label for="reqType.2">Duplication</label>
+                <p class="ml-4"><em>Submit duplication orders</em></p>
+              </div>
+            </div>
+  
+            <div id="dupe" class="mt-4 p-4 toggled-box">
+              <p>
+                Duplication requests are processed in the order received and generally take 2-4 weeks to complete.
+                Duplication Services staff will contact you to confirm your request when your order is ready to be
+                processed.
+              </p>
+              <p class="mb-3 mb-md-4">
+                To view our fee schedule and policies, please visit:
+                <a
+                  href="http://library.ucla.edu/use/access-privileges/print-copy-scan/special-collections-reproductions"
+                  target="_blank"
+                  >http://library.ucla.edu/use/access-privileges/print-copy-scan/special-collections-reproductions</a
+                >
+              </p>
+              <label for="Format"><h5 class="h5-blue">Format:</h5></label>
+              <br />
+              <div class="input-row">
+                <span><input type="radio" name="reqType" id="reqType.2" value="AV" /> <label>Audio / Video</label></span>
+                <span><input type="radio" name="reqType" id="reqType.2" value="PDF" /> <label>PDF</label></span>
+                <span><input type="radio" name="reqType" id="reqType.2" value="TIFF" /> <label>TIFF</label></span>
+              </div>
+              <hr />
+              <input type="checkbox" name="ForPublication" id="ForPublication" value="Yes" />
+              <label for="ForPublication">For Publication?</label>
+              <hr />
+              <label for="ItemInfo3">Project Description</label><br />
+              <textarea cols="45" rows="5" id="ItemInfo3" name="ItemInfo3" disabled="true"></textarea>
+
+              <input value="Copy" name="RequestType" id="RequestType" type="hidden" disabled="true" />
+              <input type="hidden" name="SkipOrderEstimate" id="SkipOrderEstimate" value="Yes" disabled="true" />
+            </div>
+            <hr />
+            <!--  -->
+            <c:choose>
+                <c:when test="${not empty param.theDate}">
+                  <input name="ScheduledDate" type="hidden" value="${param.theDate}" />
+                </c:when>
+                <c:otherwise>
+                  <input name="ScheduledDate" type="hidden" value="${param.textDate}" />
+                </c:otherwise>
+              </c:choose>
         
-        <c:set var="openDates" value="${dateGetter.availables}"/>
-        <tr>
-          <td colspan="2">
-              <table>
-                <tr>
-                  <th colspan="3">
-                    Select date of visit.<br/>
-                    If material is stored off-site, please allow at least 3 days for retrieval.
-                  </th>
-                </tr>
-              </table>
-              <fieldset>
-              <legend>Library is open on: </legend>
-              <table>
-                <tr>
-                  <td>Select a listed date</td>
-                  <td align="center">OR</td>
-                  <td><label for="textDate">Enter a preferred date</label></td>
-                </tr>
-                <tr>
-                  <td>
+              <c:choose>
+                <c:when test="${bibSource.isBio}">
+                  <input name="Site" type="hidden" value="BIOMED" />
+                </c:when>
+                <c:otherwise>
+                  <input name="Site" type="hidden" value="YRL" />
+                </c:otherwise>
+              </c:choose>
+        
+              <input type="hidden" name="ItemAuthor" value="${bibRecord.author}" />
+              <input type="hidden" name="ItemDate" value="${bibRecord.pubDates}" />
+              <input type="hidden" name="SubmitButton" value="Submit Request" />
+              <input type="hidden" name="WebRequestForm" value="DefaultRequest" />
+        
+              <c:choose>
+                <c:when test="${not empty bibRecord.srlfItems}">
+                  <c:set var="index" value="-1" />
+        
+                  <c:forEach var="srlf" items="${bibRecord.srlfItems}" begin="0" end="0">
+                    <input value="${srlf.location}" name="Location" type="hidden" />
+                  </c:forEach>
+            <!--  -->
+          </section>
+
+        <!-- Date of Visit -->
+        <section class="req-date" id="visit" name="Visit">
+          <jsp:useBean id="dateGetter"
+          class="edu.ucla.library.libservices.aeon.vger.utility.AvailableDates">
+            <c:choose>
+              <c:when test="${bibSource.isBio}">
+                <jsp:setProperty name="dateGetter" property="unitID" value='<%= application.getInitParameter("unitid.biohis") %>'/>
+              </c:when>
+              <c:otherwise>
+                <jsp:setProperty name="dateGetter" property="unitID" value='<%= application.getInitParameter("unitid.yrlspc") %>'/>
+              </c:otherwise>
+            </c:choose>
+            <%--jsp:setProperty name="dateGetter" property="dbName" value='<%= application.getInitParameter("datasource.hours") %>'/--%>
+          </jsp:useBean>
+          
+          <c:set var="openDates" value="${dateGetter.availables}"/>
+
+          <h4 class="h4-blue">Select Date of Visit</h4>
+          <p class="text-danger pb-0 mb-0"><em>Required</em></p>
+          <p>
+            We cannot accommodate same day requests for off-site materials. Please allow at least 3 days for retrieval
+            of off-site materials.
+          </p>
+          <div class="req-date-row text-center">
+            <div class="date-box date-picker pl-3 pt-3">
+              <p>Select a listed date</p>
+              <div class="date-col-wrapper">
+                <div class="date-col1">
+                  <div class="date-item">
                     <c:forEach var="theDate" items="${openDates}" begin="0" end="6">
                       <input type="radio" name="theDate" id="theDate.${theDate}" value="${theDate}"/>
                       &nbsp;<label for="theDate.${theDate}">${theDate}</label><br/>
                     </c:forEach>
-                  </td>
-                  <td>
+                  </div>
+                </div>
+                <div class="date-col2">
+                  <div class="date-item">
                     <c:forEach var="theDate" items="${openDates}" begin="7" end="13">
                       <input type="radio" name="theDate" id="theDate.${theDate}" value="${theDate}"/>
                       &nbsp;<label for="theDate.${theDate}">${theDate}</label><br/>
                     </c:forEach>
-                  </td>
-                  <td>
-                    <input name="textDate" id="textDate" value="" onchange="clearRadioDates();" placeholder="MM/DD/YYYY"/>
-                  </td>
-                </tr>
-              </table>
-              </fieldset>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <!--input type="submit" value="Confirm Request"/-->
-            &nbsp;
-          </td>
-        </tr>
-      </table>
-      <br/>
-      <c:choose>
-        <c:when test="${not empty bibRecord.srlfItems}">
-          <fieldset style="border-style: none; width: 960px; margin: 0 auto;">
-          <legend>Items in collection: </legend>
-          <table align="center" width="960" border="1" class="footer">
-            <tr>
-              <th width="25%">Request</th>
-              <th width="75%">Item Description</th>
-            </tr>
-            <c:forEach var="srlf" items="${bibRecord.srlfItems}">
-              <tr>
-                <td width="25%" align="center">
-                  <%--input type="checkbox" name="itemID" id="item.${srlf.itemID}" value="${srlf.itemID}"/--%>
-                  <c:choose>
-                    <c:when test="${not empty srlf.itemID}">
-                      <input type="checkbox" name="itemID" id="item.${srlf.itemID}" value="${srlf.itemID}"/>
-                    </c:when>
-                    <c:otherwise>
-                      <input type="checkbox" name="itemID" id="item.${srlf.callNo}" value="${srlf.callNo}"/>
-                    </c:otherwise>
-                  </c:choose>
-                  <%--c:if test="${(not empty srlf.statusID) and (srlf.statusID ne 1)}">
-                    <br/>
-                    (${srlf.status}; There may be a delay in retrieval)
-                  </c:if--%>
-                </td>
-                <td width="75%">
-                  <label for="item.${srlf.itemID}">
-                  <c:if test="${not empty srlf.itemEnum}">
-                    ${srlf.itemEnum}&nbsp;|&nbsp;
-                  </c:if>
-                  <c:if test="${not empty srlf.chron}">
-                    ${srlf.chron}&nbsp;|&nbsp;
-                  </c:if>
-                  <c:if test="${(not empty srlf.copy) and (srlf.copy ne 0)}">
-                    Copy&nbsp;${srlf.copy}&nbsp;|&nbsp;
-                  </c:if>
-                  <c:if test="${not empty srlf.note}">
-                    ${srlf.note}&nbsp;|&nbsp;
-                  </c:if>
-                  <c:if test="${not empty srlf.callNo}">
-                    ${srlf.callNo}&nbsp;|&nbsp;
-                  </c:if>
-                  <c:if test="${not empty srlf.freeText}">
-                    ${srlf.freeText}&nbsp;|&nbsp;
-                  </c:if>
-                  <c:if test="${not empty srlf.oacDetails}">
-                    <br/>
-                    ${srlf.oacDetails}
-                  </c:if>
-                  <c:if test="${not empty srlf.pickupLocale}">
-                    <br/>
-                    ${srlf.pickupLocale}
-                  </c:if>
-                  </label>
-                </td>
-              </tr>
-            </c:forEach>
-            <tr>
-              <td colspan="2">
-                <input type="submit" value="Submit Request"/>
-              </td>
-            </tr>
-          </table>
-          </fieldset>
-        </c:when>
-        <c:otherwise>
-          <table align="center" width="960" border="0" class="footer">
-            <tr>
-              <td>
-                <input type="submit" value="Confirm Request"/>
-              </td>
-            </tr>
-          </table>
-        </c:otherwise>
-      </c:choose>
-      <br/>
-    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="mid-col pt-3"><b>OR</b></p>
+            <div class="date-box date-input pl-3 pt-3">
+              <p>Enter your preferred date</p>
+              <input name="textDate" id="textDate" value="" onchange="clearRadioDates();" placeholder="MM/DD/YYYY" />
+            </div>
+          </div>
+          <hr />
+        </section>
+
+        <!-- Special Requests -->
+        <section class="req-notes">
+          <h4 class="h4-blue">Special Requests</h4>
+          <p class="text-muted pb-0 mb-0"><em>Optional</em></p>
+          <label class="pt-0 pb-2" for="specReq">
+            Please enter any special requests or questions you have for library staff.</label
+          ><br />
+          <textarea
+            cols="45"
+            rows="5"
+            name="specReq"
+            id="specReq"
+            maxlength="255"
+            placeholder="Maximum 255 characters"
+          ></textarea>
+          <hr />
+        </section>
+<!--  -->
+<!--  -->
+        <input type="submit" value="Submit Request"/>
+            </c:when>
+            <c:otherwise>
+              <input type="submit" value="Confirm Request"/>
+            </c:otherwise>
+          </c:choose>
+        
+      </form>
+    </main>
+
+    <footer class="p-4">
+      <small class="text-white">Copyright &copy; 2019 UC Regents. All Rights Reserved.</small>
+    </footer>
+
+    <script src="js/toggle.js" type="text/javascript" language="JavaScript"></script>
+    <script src="js/validateForm.js" type="text/javascript" language="JavaScript"></script>
   </body>
 </html>
+
+
     <!--h3>Viewing bib and holdings for ${param.bibID}</h3-->
     <!--ul>
       <li>title:&nbsp;${bibRecord.title}</li>

@@ -1,0 +1,45 @@
+@import "./variables";
+
+.req-date-row {
+  display: block;
+  width: 100%;
+
+  .date-col-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .date-box {
+    min-height: 200px;
+    max-width: 400px;
+    border-radius: 2px;
+    @include box-border-style;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  p {
+    color: $ucla-darker-blue;
+    font-weight: 600;
+  }
+  .mid-col {
+    color: $black;
+    max-width: 400px;
+  }
+  input {
+    height: max-content;
+  }
+}
+
+@media (min-width: 768px) {
+  .req-date-row {
+    display: flex;
+    .date-box {
+      flex-basis: 400px;
+      margin: 0;
+    }
+    .mid-col {
+      width: 100px;
+    }
+  }
+}

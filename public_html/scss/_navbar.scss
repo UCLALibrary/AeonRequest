@@ -1,0 +1,53 @@
+// @import "./variables";
+
+.site-navbar {
+  .nav-primary {
+    background-color: $ucla-blue;
+    height: 65px;
+
+    img {
+      max-width: 150px;
+    }
+
+    .site-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      position: relative;
+      top: 0.25rem;
+      left: -1rem;
+    }
+  }
+
+  .nav-secondary {
+    background-color: $ucla-gold;
+
+    a {
+      color: $black;
+      font-weight: 500;
+      position: relative;
+
+      &::after {
+        content: " ";
+        position: absolute;
+        bottom: 0.5rem;
+        left: 1rem;
+        right: 100%;
+        border-bottom: 0.2em solid $ucla-blue;
+        transition: right 0.4s cubic-bezier(0, 0.5, 0, 1);
+      }
+
+      &:hover::after {
+        right: 0%;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-secondary {
+    a {
+      width: max-content;
+    }
+  }
+}
