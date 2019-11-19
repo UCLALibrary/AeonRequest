@@ -5,7 +5,7 @@
     <jsp:setProperty name="bibSource" property="bibID" param="bibID"/>
     <jsp:setProperty name="bibSource" property="itemIDs" value="${paramValues.itemID}"/>
     <jsp:setProperty name="bibSource" property="dbName"
-                     value='&lt;%= application.getInitParameter("datasource.vger") %>'/>
+                     value='<%= application.getInitParameter("datasource.vger") %>'/>
 </jsp:useBean>
 <html lang="en">
     <head>
