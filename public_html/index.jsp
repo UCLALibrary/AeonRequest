@@ -4,7 +4,7 @@
 <jsp:useBean id="bibSource" class="edu.ucla.library.libservices.aeon.vger.generators.VgerBibDataGenerator">
     <jsp:setProperty name="bibSource" property="bibID" param="bibID"/>
     <jsp:setProperty name="bibSource" property="dbName"
-                     value='&lt;%= application.getInitParameter("datasource.vger") %>'/>
+                     value='<%= application.getInitParameter("datasource.vger") %>'/>
 </jsp:useBean>
 <html lang="en">
     <head>
@@ -309,11 +309,11 @@
                                 <c:choose>
                                     <c:when test="${bibSource.isBio}">
                                         <jsp:setProperty name="dateGetter" property="unitID"
-                                                         value='&lt;%= application.getInitParameter("unitid.biohis") %>'/>
+                                                         value='<%= application.getInitParameter("unitid.biohis") %>'/>
                                     </c:when>
                                     <c:otherwise>
                                         <jsp:setProperty name="dateGetter" property="unitID"
-                                                         value='&lt;%= application.getInitParameter("unitid.yrlspc") %>'/>
+                                                         value='<%= application.getInitParameter("unitid.yrlspc") %>'/>
                                     </c:otherwise>
                                 </c:choose>
                                 <%-- jsp:setProperty name="dateGetter" property="dbName" value='<%=
