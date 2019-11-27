@@ -34,6 +34,11 @@
 
   .column-1 {
     border-right: 1px solid $ucla-blue;
+
+    input[type="checkbox"] {
+      margin-right: 0rem;
+      font-size: 1rem;
+    }
   }
 
   .column-2 {
@@ -74,6 +79,14 @@
 .table-12-88 {
   .t-row .column-1 {
     width: 12%;
+  }
+}
+
+@media (max-width: 600px) {
+  .table-12-88 {
+    .t-row .column-1 {
+      width: 15%;
+    }
   }
 }
 

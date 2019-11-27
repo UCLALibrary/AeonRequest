@@ -1,8 +1,10 @@
 @import "./variables";
 
-input[type="radio"],
-input[type="checkbox"] {
-  margin-right: 1rem;
+.req-type {
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin-right: 1rem;
+  }
 }
 
 .req-type-row {

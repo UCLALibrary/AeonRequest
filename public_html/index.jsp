@@ -131,12 +131,12 @@
                     <c:when test="${not empty bibRecord.srlfItems}">
                         <!-- Request Material -->
                         <section class="req-materials">
-                            <!-- Table with column 1 at 10%, column 2 at 90% -->
+                            <!-- Table with column 1 at 12%, column 2 at 88% -->
                             <div class="table table-12-88">
                                 <!-- Start of table heading -->
                                 <div class="t-heading text-center">
                                     <div class="t-cell py-2">
-                                        <small>Select</small>
+                                        Select
                                     </div>
                                     <div class="t-cell py-2">Item Description</div>
                                 </div>
