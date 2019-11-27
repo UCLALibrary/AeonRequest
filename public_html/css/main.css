@@ -208,6 +208,10 @@
   margin-top: 1rem;
 }
 
+.req-type-row .req-type-box p {
+  margin-left: 2rem;
+}
+
 @media (min-width: 992px) {
   .req-type-row {
     display: -webkit-box;

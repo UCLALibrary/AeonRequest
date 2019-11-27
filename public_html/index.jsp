@@ -224,7 +224,7 @@
                                            onclick="toggle_visibility('dupe', 'visit',2);"/>
                                      
                                     <label for="reqType.2">Duplication</label>
-                                    <p class="ml-4">
+                                    <p>
                                         <em>Submit duplication orders</em>
                                     </p>
                                 </div>
