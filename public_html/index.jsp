@@ -83,7 +83,7 @@
                             <div class="t-cell py-1 px-3 column-2">
                                 <ul>
                                     <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
-                                        <li style="list-style-type: none;">
+                                        <li>
                                             <c:if test="${not empty yrl.callNo}">
                                                 ${yrl.callNo}
                                             </c:if>
