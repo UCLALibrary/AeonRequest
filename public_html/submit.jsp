@@ -95,7 +95,15 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
             <div class="t-row">
               <div class="t-cell py-1 px-3 column-1">Request Type</div>
               <div class="t-cell py-1 px-3 column-2">
-                ${param.reqType}
+                <!-- ${param.reqType} -->
+                <c:choose>
+                  <c:when test="${param.reqType eq 1}">
+                    On-Site Review
+                  </c:when>
+                  <c:otherwise>
+                    Duplication: ${param.Format}
+                  </c:otherwise>
+                </c:choose>
               </div>
             </div>
             <!-- End of row -->
@@ -107,8 +115,11 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
                   <c:when test="${not empty param.theDate}">
                     ${param.theDate}
                   </c:when>
-                  <c:otherwise>
+                  <c:when test="${not empty param.textDate}">
                     ${param.textDate}
+                  </c:when>
+                  <c:otherwise>
+                    Date not required
                   </c:otherwise>
                 </c:choose>
               </div>

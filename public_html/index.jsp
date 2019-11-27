@@ -245,16 +245,16 @@
                                 <br/>
                                 <div class="input-row">
                                     <span>
-                                        <input type="radio" name="reqType" id="reqType.2" value="AV"/><label>Audio /
+                                        <input type="radio" name="Format" id="format.1" value="AV"/><label>Audio /
                                                                                                              Video</label></span>
                                      
                                     <span>
-                                        <input type="radio" name="reqType" id="reqType.2" value="PDF"/>
+                                        <input type="radio" name="Format" id="format.2" value="PDF"/>
                                          
                                         <label>PDF</label></span>
                                      
                                     <span>
-                                        <input type="radio" name="reqType" id="reqType.2" value="TIFF"/><label>TIFF</label></span>
+                                        <input type="radio" name="Format" id="format.3" value="TIFF"/><label>TIFF</label></span>
                                 </div>
                                 <hr/>
                                 <input type="checkbox" name="ForPublication" id="ForPublication" value="Yes"/>
