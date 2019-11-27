@@ -190,11 +190,11 @@
                                                     &nbsp;|&nbsp;
                                                 </c:if>
                                                 <c:if test="${not empty srlf.oacDetails}">
-                                                    <br/>
+                                                    
                                                     ${srlf.oacDetails}
                                                 </c:if>
                                                 <c:if test="${not empty srlf.pickupLocale}">
-                                                    <br/>
+                                                    &nbsp;|&nbsp;
                                                     ${srlf.pickupLocale}
                                                 </c:if>
                                             </label>
