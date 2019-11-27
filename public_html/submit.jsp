@@ -91,6 +91,29 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
               </div>
             </div>
             <!-- End of row -->
+            <!-- Start of row -->
+            <div class="t-row">
+              <div class="t-cell py-1 px-3 column-1">Request Type</div>
+              <div class="t-cell py-1 px-3 column-2">
+                ${param.reqType}
+              </div>
+            </div>
+            <!-- End of row -->
+            <!-- Start of row -->
+            <div class="t-row">
+              <div class="t-cell py-1 px-3 column-1">Requested Date</div>
+              <div class="t-cell py-1 px-3 column-2">
+                <c:choose>
+                  <c:when test="${not empty param.theDate}">
+                    ${param.theDate}
+                  </c:when>
+                  <c:otherwise>
+                    ${param.textDate}
+                  </c:otherwise>
+                </c:choose>
+              </div>
+            </div>
+            <!-- End of row -->
           </div>
           <!--End of table -->
           <hr />
