@@ -87,7 +87,11 @@
             <!-- Start of row -->
             <div class="t-row">
               <div class="t-cell py-1 px-3 column-1">Call Number(s)</div>
-              <div class="t-cell py-1 px-3 column-2">612</div>
+              <div class="t-cell py-1 px-3 column-2">
+                <ul>
+                  <li>612</li>
+                </ul>
+              </div>
             </div>
             <!-- End of row -->
             <!-- Start of row -->
@@ -109,17 +113,17 @@
 
         <!-- Request Material -->
         <section class="req-materials">
-          <!-- Table with column 1 at 10%, column 2 at 90% -->
+          <!-- Table with column 1 at 12%, column 2 at 88% -->
           <div class="table table-12-88">
             <!-- Start of table heading -->
             <div class="t-heading text-center">
-              <div class="t-cell py-2"><small>Select</small></div>
+              <div class="t-cell py-2">Select</div>
               <div class="t-cell py-2">Item Description</div>
             </div>
             <!-- End of table heading -->
             <!-- Start of row -->
             <div class="t-row">
-              <div class="t-cell py-1 text-center column-1">Box1</div>
+              <div class="t-cell py-1 text-center column-1"><input type="checkbox" /></div>
               <div class="t-cell py-1 px-3 column-2">
                 Requested item description Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi cum nihil
                 velit atque quos a dolores ea asperiores doloremque corrupti.
@@ -181,7 +185,7 @@
                 onclick="toggle_visibility('dupe', 'visit',2);"
               />
               <label for="reqType.2">Duplication</label>
-              <p class="ml-4"><em>Submit duplication orders</em></p>
+              <p><em>Submit duplication orders</em></p>
             </div>
           </div>
 
@@ -200,22 +204,24 @@
               >
             </p>
             <label for="Format"><h5 class="h5-blue">Format:</h5></label><br />
-            <!-- <select name="Format" id="Format" disabled="true">
-              <option value="AV">Audio/video</option>
-              <option value="PDF">PDF</option>
-              <option value="TIFF">TIFF</option>
-            </select> -->
             <div class="input-row">
-              <span><input type="radio" name="reqType" id="reqType.2" value="AV" /> <label>Audio / Video</label></span>
-              <span><input type="radio" name="reqType" id="reqType.2" value="PDF" /> <label>PDF</label></span>
-              <span><input type="radio" name="reqType" id="reqType.2" value="TIFF" /> <label>TIFF</label></span>
+              <span><input type="radio" name="Format" id="format.1" value="AV" /> <label>Audio / Video</label></span>
+              <span><input type="radio" name="Format" id="format.2" value="PDF" /> <label>PDF</label></span>
+              <span><input type="radio" name="Format" id="format.3" value="TIFF" /> <label>TIFF</label></span>
             </div>
             <hr />
             <input type="checkbox" name="ForPublication" id="ForPublication" value="Yes" />
             <label for="ForPublication">For Publication?</label>
             <hr />
             <label for="ItemInfo3">Project Description</label><br />
-            <textarea cols="45" rows="5" id="ItemInfo3" name="ItemInfo3" disabled="true"></textarea>
+            <textarea
+              cols="82"
+              rows="5"
+              id="ItemInfo3"
+              name="ItemInfo3"
+              maxlength="255"
+              placeholder="Maximum 255 characters"
+            ></textarea>
           </div>
           <hr />
         </section>
@@ -228,8 +234,8 @@
             We cannot accommodate same day requests for off-site materials. Please allow at least 3 days for retrieval
             of off-site materials.
           </p>
-          <div class="req-date-row text-center">
-            <div class="date-box date-picker pl-3 pt-3">
+          <div class="req-date-row">
+            <div class="date-box date-picker px-3 pt-3">
               <p>Select a listed date</p>
               <div class="date-col-wrapper">
                 <div class="date-col1">
@@ -258,11 +264,7 @@
                     <label for="theDate.${theDate}">10/01/19</label>
                   </div>
                 </div>
-                <div class="date-col2">
-                  <div class="date-item">
-                    <input type="radio" name="theDate" id="theDate.${theDate}" value="${theDate}" />
-                    <label for="theDate.${theDate}">10/01/19</label>
-                  </div>
+                <div class="date-col2 ml-5">
                   <div class="date-item">
                     <input type="radio" name="theDate" id="theDate.${theDate}" value="${theDate}" />
                     <label for="theDate.${theDate}">10/01/19</label>
@@ -307,7 +309,7 @@
             Please enter any special requests or questions you have for library staff.</label
           ><br />
           <textarea
-            cols="45"
+            cols="99"
             rows="5"
             name="specReq"
             id="specReq"

@@ -34,6 +34,18 @@
   border-right: 1px solid #2774ae;
 }
 
+.table .column-1 input[type="checkbox"] {
+  margin-right: 0rem;
+  font-size: 1rem;
+}
+
+.table .column-2 ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .table .t-row:nth-child(odd) {
   background-color: #fff;
 }
@@ -55,6 +67,12 @@
 
 .table-12-88 .t-row .column-1 {
   width: 12%;
+}
+
+@media (max-width: 600px) {
+  .table-12-88 .t-row .column-1 {
+    width: 15%;
+  }
 }
 
 .table-100 .column-1 {
@@ -105,10 +123,21 @@
 }
 
 @media (max-width: 768px) {
-  .nav-secondary a {
+  .site-navbar .nav-secondary a {
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+  }
+}
+
+@media (max-width: 499px) {
+  .site-navbar .nav-primary {
+    height: auto;
+  }
+  .site-navbar .nav-primary .site-title {
+    display: block;
+    top: -10px;
+    left: 15px;
   }
 }
 
@@ -121,9 +150,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 
 .req-date-row .date-box {
@@ -151,6 +177,7 @@
 .req-date-row .mid-col {
   color: #333333;
   max-width: 400px;
+  text-align: center;
 }
 
 .req-date-row input {
@@ -175,8 +202,8 @@
   }
 }
 
-input[type="radio"],
-input[type="checkbox"] {
+.req-type input[type="radio"],
+.req-type input[type="checkbox"] {
   margin-right: 1rem;
 }
 
@@ -188,6 +215,10 @@ input[type="checkbox"] {
   border-radius: 3px;
   padding: 20px 10px 10px 20px;
   margin-top: 1rem;
+}
+
+.req-type-row .req-type-box p {
+  margin-left: 2rem;
 }
 
 @media (min-width: 992px) {
@@ -253,8 +284,8 @@ hr {
   font-size: 0.875rem;
   font-style: italic;
   opacity: 0.8;
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-top: 1px;
+  padding-left: 1px;
 }
 
 :-ms-input-placeholder {
@@ -262,8 +293,8 @@ hr {
   font-size: 0.875rem;
   font-style: italic;
   opacity: 0.8;
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-top: 1px;
+  padding-left: 1px;
 }
 
 ::-ms-input-placeholder {
@@ -271,8 +302,8 @@ hr {
   font-size: 0.875rem;
   font-style: italic;
   opacity: 0.8;
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-top: 1px;
+  padding-left: 1px;
 }
 
 ::placeholder {
@@ -280,8 +311,8 @@ hr {
   font-size: 0.875rem;
   font-style: italic;
   opacity: 0.8;
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-top: 1px;
+  padding-left: 1px;
 }
 
 :-ms-input-placeholder {
@@ -289,8 +320,8 @@ hr {
   font-size: 0.875rem;
   font-style: italic;
   opacity: 0.8;
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-top: 1px;
+  padding-left: 1px;
 }
 
 ::-ms-input-placeholder {
@@ -298,8 +329,8 @@ hr {
   font-size: 0.875rem;
   font-style: italic;
   opacity: 0.8;
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-top: 1px;
+  padding-left: 1px;
 }
 
 textarea {
@@ -327,9 +358,11 @@ a {
 }
 
 @media (max-width: 768px) {
-  .welcome p,
-  .welcome ul {
-    font-size: 14px;
+  p p,
+  p ul,
+  .pg-welcome p,
+  .pg-welcome ul {
+    font-size: 15px;
   }
   .h4-blue {
     font-size: 20px;
@@ -357,5 +390,9 @@ input[type="submit"]:hover {
 footer {
   background-color: #2774ae;
   margin-top: 6.25rem;
+}
+
+.error-log-wrapper {
+  overflow-wrap: break-word;
 }
 /*# sourceMappingURL=main.css.map */

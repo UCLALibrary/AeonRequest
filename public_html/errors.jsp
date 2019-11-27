@@ -55,8 +55,9 @@
         </p>
 
         <p>Manual requests can also be made by clicking on the “Request an Item” link under the “New Request” sidebar option of the UCLA Library Special Collections Request System home page.</p>
-
+        <hr>
         <!--  -->
+        <div class="error-log-wrapper">
         <%
         if (exception != null) 
         { 
@@ -72,6 +73,7 @@
           out.println( "Sorry, no error message available" );
         }
         %>
+      </div>
       </section>
 
       <!--  -->

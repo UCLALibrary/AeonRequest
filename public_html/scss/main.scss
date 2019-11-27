@@ -62,10 +62,11 @@ a {
 }
 
 @media (max-width: 768px) {
-  .welcome {
+  p,
+  .pg-welcome {
     p,
     ul {
-      font-size: 14px;
+      font-size: 15px;
     }
   }
   .h4-blue {
@@ -93,4 +94,8 @@ input[type="submit"]:hover {
 footer {
   background-color: $ucla-blue;
   margin-top: 6.25rem;
+}
+
+.error-log-wrapper {
+  overflow-wrap: break-word;
 }

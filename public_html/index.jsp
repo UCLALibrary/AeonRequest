@@ -83,7 +83,7 @@
                             <div class="t-cell py-1 px-3 column-2">
                                 <ul>
                                     <c:forEach var="yrl" items="${bibRecord.yrlHoldings}">
-                                        <li style="list-style-type: none;">
+                                        <li>
                                             <c:if test="${not empty yrl.callNo}">
                                                 ${yrl.callNo}
                                             </c:if>
@@ -131,12 +131,12 @@
                     <c:when test="${not empty bibRecord.srlfItems}">
                         <!-- Request Material -->
                         <section class="req-materials">
-                            <!-- Table with column 1 at 10%, column 2 at 90% -->
+                            <!-- Table with column 1 at 12%, column 2 at 88% -->
                             <div class="table table-12-88">
                                 <!-- Start of table heading -->
                                 <div class="t-heading text-center">
                                     <div class="t-cell py-2">
-                                        <small>Select</small>
+                                        Select
                                     </div>
                                     <div class="t-cell py-2">Item Description</div>
                                 </div>
@@ -190,11 +190,11 @@
                                                     &nbsp;|&nbsp;
                                                 </c:if>
                                                 <c:if test="${not empty srlf.oacDetails}">
-                                                    <br/>
+                                                    
                                                     ${srlf.oacDetails}
                                                 </c:if>
                                                 <c:if test="${not empty srlf.pickupLocale}">
-                                                    <br/>
+                                                    &nbsp;|&nbsp;
                                                     ${srlf.pickupLocale}
                                                 </c:if>
                                             </label>
@@ -224,7 +224,7 @@
                                            onclick="toggle_visibility('dupe', 'visit',2);"/>
                                      
                                     <label for="reqType.2">Duplication</label>
-                                    <p class="ml-4">
+                                    <p>
                                         <em>Submit duplication orders</em>
                                     </p>
                                 </div>
@@ -245,16 +245,16 @@
                                 <br/>
                                 <div class="input-row">
                                     <span>
-                                        <input type="radio" name="reqType" id="reqType.2" value="AV"/><label>Audio /
+                                        <input type="radio" name="Format" id="format.1" value="AV"/><label>Audio /
                                                                                                              Video</label></span>
                                      
                                     <span>
-                                        <input type="radio" name="reqType" id="reqType.2" value="PDF"/>
+                                        <input type="radio" name="Format" id="format.2" value="PDF"/>
                                          
                                         <label>PDF</label></span>
                                      
                                     <span>
-                                        <input type="radio" name="reqType" id="reqType.2" value="TIFF"/><label>TIFF</label></span>
+                                        <input type="radio" name="Format" id="format.3" value="TIFF"/><label>TIFF</label></span>
                                 </div>
                                 <hr/>
                                 <input type="checkbox" name="ForPublication" id="ForPublication" value="Yes"/>
@@ -263,7 +263,8 @@
                                 <hr/>
                                 <label for="ItemInfo3">Project Description</label><br/>
                                  
-                                <textarea cols="45" rows="5" id="ItemInfo3" name="ItemInfo3" disabled="true"></textarea>
+                                <textarea cols="82" rows="5" id="ItemInfo3" name="ItemInfo3" maxlength="255"
+                                placeholder="Maximum 255 characters"></textarea>
                                  
                                 <input value="Copy" name="RequestType" id="RequestType" type="hidden" disabled="true"/>
                                  
@@ -327,7 +328,7 @@
                             <p>We cannot accommodate same day requests for off-site materials. Please allow at least 3
                                days for retrieval of off-site materials.</p>
                             <div class="req-date-row text-center">
-                                <div class="date-box date-picker pl-3 pt-3">
+                                <div class="date-box date-picker px-3 pt-3">
                                     <p>Select a listed date</p>
                                     <div class="date-col-wrapper">
                                         <div class="date-col1">
@@ -343,7 +344,7 @@
                                                 </c:forEach>
                                             </div>
                                         </div>
-                                        <div class="date-col2">
+                                        <div class="date-col2 ml-5">
                                             <div class="date-item">
                                                 <c:forEach var="theDate" items="${openDates}" begin="7" end="13">
                                                     <input type="radio" name="theDate" id="theDate.${theDate}"
@@ -378,13 +379,13 @@
                             <label class="pt-0 pb-2" for="specReq">Please enter any special requests or questions you
                                                                    have for library staff.</label>
                             <br/>
-                            <textarea cols="45" rows="5" name="specReq" id="specReq" maxlength="255"
+                            <textarea cols="99" rows="5" name="specReq" id="specReq" maxlength="255"
                                       placeholder="Maximum 255 characters"></textarea>
                             <hr/>
                         </section>
                         <!--  -->
                         <!--  -->
-                        <input type="submit" value="Submit Request"/>
+                        <input type="submit" value="Confirm Request"/>
                     </c:when>
                     <c:otherwise>
                         <input type="submit" value="Confirm Request"/>
