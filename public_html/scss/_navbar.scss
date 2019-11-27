@@ -45,9 +45,24 @@
 }
 
 @media (max-width: 768px) {
-  .nav-secondary {
-    a {
-      width: max-content;
+  .site-navbar {
+    .nav-secondary {
+      a {
+        width: max-content;
+      }
+    }
+  }
+}
+
+@media (max-width: 499px) {
+  .site-navbar {
+    .nav-primary {
+      height: auto;
+      .site-title {
+        display: block;
+        top: -10px;
+        left: 15px;
+      }
     }
   }
 }

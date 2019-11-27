@@ -123,10 +123,21 @@
 }
 
 @media (max-width: 768px) {
-  .nav-secondary a {
+  .site-navbar .nav-secondary a {
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+  }
+}
+
+@media (max-width: 499px) {
+  .site-navbar .nav-primary {
+    height: auto;
+  }
+  .site-navbar .nav-primary .site-title {
+    display: block;
+    top: -10px;
+    left: 15px;
   }
 }
 
