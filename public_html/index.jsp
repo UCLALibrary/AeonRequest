@@ -263,7 +263,8 @@
                                 <hr/>
                                 <label for="ItemInfo3">Project Description</label><br/>
                                  
-                                <textarea cols="45" rows="5" id="ItemInfo3" name="ItemInfo3" disabled="true"></textarea>
+                                <textarea cols="82" rows="5" id="ItemInfo3" name="ItemInfo3" maxlength="255"
+                                placeholder="Maximum 255 characters"></textarea>
                                  
                                 <input value="Copy" name="RequestType" id="RequestType" type="hidden" disabled="true"/>
                                  
@@ -327,7 +328,7 @@
                             <p>We cannot accommodate same day requests for off-site materials. Please allow at least 3
                                days for retrieval of off-site materials.</p>
                             <div class="req-date-row text-center">
-                                <div class="date-box date-picker pl-3 pt-3">
+                                <div class="date-box date-picker px-3 pt-3">
                                     <p>Select a listed date</p>
                                     <div class="date-col-wrapper">
                                         <div class="date-col1">
@@ -343,7 +344,7 @@
                                                 </c:forEach>
                                             </div>
                                         </div>
-                                        <div class="date-col2">
+                                        <div class="date-col2 ml-5">
                                             <div class="date-item">
                                                 <c:forEach var="theDate" items="${openDates}" begin="7" end="13">
                                                     <input type="radio" name="theDate" id="theDate.${theDate}"
@@ -378,7 +379,7 @@
                             <label class="pt-0 pb-2" for="specReq">Please enter any special requests or questions you
                                                                    have for library staff.</label>
                             <br/>
-                            <textarea cols="45" rows="5" name="specReq" id="specReq" maxlength="255"
+                            <textarea cols="99" rows="5" name="specReq" id="specReq" maxlength="255"
                                       placeholder="Maximum 255 characters"></textarea>
                             <hr/>
                         </section>

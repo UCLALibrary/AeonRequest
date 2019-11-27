@@ -150,9 +150,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 
 .req-date-row .date-box {
@@ -180,6 +177,7 @@
 .req-date-row .mid-col {
   color: #333333;
   max-width: 400px;
+  text-align: center;
 }
 
 .req-date-row input {
