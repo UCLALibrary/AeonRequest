@@ -358,9 +358,11 @@ a {
 }
 
 @media (max-width: 768px) {
-  .welcome p,
-  .welcome ul {
-    font-size: 14px;
+  p p,
+  p ul,
+  .pg-welcome p,
+  .pg-welcome ul {
+    font-size: 15px;
   }
   .h4-blue {
     font-size: 20px;
@@ -388,5 +390,9 @@ input[type="submit"]:hover {
 footer {
   background-color: #2774ae;
   margin-top: 6.25rem;
+}
+
+.error-log-wrapper {
+  overflow-wrap: break-word;
 }
 /*# sourceMappingURL=main.css.map */
