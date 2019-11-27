@@ -385,7 +385,7 @@
                         </section>
                         <!--  -->
                         <!--  -->
-                        <input type="submit" value="Submit Request"/>
+                        <input type="submit" value="Confirm Request"/>
                     </c:when>
                     <c:otherwise>
                         <input type="submit" value="Confirm Request"/>
