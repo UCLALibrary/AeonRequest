@@ -73,7 +73,7 @@
             <form action="submit.jsp" id="bibForm" method="POST" onsubmit="JavaScript:return validateForm(this);">
                 <input type="hidden" name="bibID" value="${param.bibID}"/>
                 <!-- Request Information -->
-                <section class="req-info">
+                <section class="req-info mt-5">
                     <!-- Table with 50-50 columns, Single header -->
                     <div class="table table-50-50">
                         <div class="t-title text-center text-white py-1">Request Information</div>
@@ -115,12 +115,6 @@
                             <div class="t-cell py-1 px-3 column-2">
                                 ${bibRecord.pubDates}
                             </div>
-                        </div>
-                        <!-- End of row -->
-                        <!-- Start of row -->
-                        <div class="t-row">
-                            <div class="t-cell py-1 px-3 column-1">Location</div>
-                            <div class="t-cell py-1 px-3 column-2">???</div>
                         </div>
                         <!-- End of row -->
                     </div>
@@ -190,11 +184,10 @@
                                                     &nbsp;|&nbsp;
                                                 </c:if>
                                                 <c:if test="${not empty srlf.oacDetails}">
-                                                    
                                                     ${srlf.oacDetails}
+                                                    &nbsp;|&nbsp;
                                                 </c:if>
                                                 <c:if test="${not empty srlf.pickupLocale}">
-                                                    &nbsp;|&nbsp;
                                                     ${srlf.pickupLocale}
                                                 </c:if>
                                             </label>

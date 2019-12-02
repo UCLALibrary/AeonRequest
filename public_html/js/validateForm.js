@@ -2,6 +2,7 @@ function validateForm(formObj) {
   var customDate = 0;
   var selectedDate = 0;
   var pattern = /\d{2}\/\d{2}\/\d{4}/;
+  var dupe = document.getElementById("dupe").style.display;
 
   for (var i = 0; i < formObj.theDate.length; i++) {
     if (formObj.theDate[i].checked) selectedDate += 1;
@@ -16,7 +17,7 @@ function validateForm(formObj) {
     } else customDate += 1;
   }
 
-  if (customDate > 0 || selectedDate > 0) return true;
+  if (customDate > 0 || selectedDate > 0 || dupe == "block") return true;
   else {
     alert("You must either select a listed date or enter a desired date for your visit");
     return false;
