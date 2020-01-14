@@ -28,14 +28,14 @@
                 </a>
             </nav>
             <nav class="nav nav-secondary flex-column flex-md-row pl-3 py-2">
-                <a class="nav-link" href="http://www.library.ucla.edu/special-collections" target="_blank">Special
+                <a class="nav-link" href="http://www.library.ucla.edu/special-collections" target="_blank" rel="noopener">Special
                                                                                                            Collections
                                                                                                            Home</a>
-                <a class="nav-link" href="https://catalog.library.ucla.edu/" target="_blank">UCLA Library Catalog</a>
-                <a class="nav-link" href="http://www.oac.cdlib.org/" target="_blank">Online Archive of California (OAC)</a>
+                <a class="nav-link" href="https://catalog.library.ucla.edu/" target="_blank" rel="noopener">UCLA Library Catalog</a>
+                <a class="nav-link" href="http://www.oac.cdlib.org/" target="_blank" rel="noopener">Online Archive of California (OAC)</a>
                 <a class="nav-link"
                    href="https://www.library.ucla.edu/special-collections/frequently-asked-questions-faq"
-                   target="_blank">FAQs</a>
+                   target="_blank" rel="noopener">FAQs</a>
             </nav>
         </section>
          
@@ -229,7 +229,7 @@
                                 <p class="mb-3 mb-md-4">
                                     To view our fee schedule and policies, please visit: 
                                     <a href="http://library.ucla.edu/use/access-privileges/print-copy-scan/special-collections-reproductions"
-                                       target="_blank">http://library.ucla.edu/use/access-privileges/print-copy-scan/special-collections-reproductions</a>
+                                       target="_blank" rel="noopener">http://library.ucla.edu/use/access-privileges/print-copy-scan/special-collections-reproductions</a>
                                 </p>
                                 <label for="Format">
                                     <h5 class="h5-blue">Format:</h5>
