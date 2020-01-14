@@ -49,7 +49,8 @@
                 </ul>
                 <p>Please select your requested materials and provide a date for your research visit. We do not accept
                    appointments and we are unable to guarantee seating arrangements.</p>
-                <p>Due to space constraints, the following paging limits are enforced:</p>
+                <p>You may have 25 active requests in your account at a time, but due to space constraints, the following paging
+                  limits are enforced:</p>
                 <ul>
                     <li>
                         <b>Retrieval of off-site holdings is limited to 5 boxes/items per day</b>
