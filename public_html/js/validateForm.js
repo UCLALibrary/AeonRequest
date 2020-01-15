@@ -16,6 +16,11 @@ function validateForm(formObj) {
     return false;
   }
 
+  if (itemCount > 5) {
+    alert("Please select at most five items to view/duplicate");
+    return false;
+  }
+
   for (var i = 0; i < formObj.theDate.length; i++) {
     if (formObj.theDate[i].checked) selectedDate += 1;
   }
