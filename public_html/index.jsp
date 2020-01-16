@@ -379,10 +379,10 @@
                         </section>
                         <!--  -->
                         <!--  -->
-                        <input type="submit" value="Confirm Request"/>
+                        <input type="submit" id="SubmitButton" value="Confirm Request"/>
                     </c:when>
                     <c:otherwise>
-                        <input type="submit" value="Confirm Request"/>
+                        <input type="submit" id="SubmitButton" value="Confirm Request"/>
                     </c:otherwise>
                 </c:choose>
             </form>
