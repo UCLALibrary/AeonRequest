@@ -6,6 +6,8 @@ function validateForm(formObj) {
   var items = document.getElementsByName("itemID");
   var itemCount = 0;
 
+  document.getElementById("SubmitButton").disabled = true;
+
   for (var i = 0; i < items.length; i++) {
     if (items[i].checked)
       itemCount += 1;
@@ -13,11 +15,13 @@ function validateForm(formObj) {
 
   if (itemCount == 0) {
     alert("Please select at least one item to view/duplicate");
+    document.getElementById("SubmitButton").disabled = false;
     return false;
   }
 
   if (itemCount > 5) {
     alert("Please select at most five items to view/duplicate");
+    document.getElementById("SubmitButton").disabled = false;
     return false;
   }
 
@@ -30,6 +34,7 @@ function validateForm(formObj) {
       alert("The date value must be in MM/DD/YYYY format");
       formObj.textDate.select();
       formObj.textDate.focus();
+      document.getElementById("SubmitButton").disabled = false;
       return false;
     } else customDate += 1;
   }
@@ -37,6 +42,7 @@ function validateForm(formObj) {
   if (customDate > 0 || selectedDate > 0 || dupe == "block") return true;
   else {
     alert("You must either select a listed date or enter a desired date for your visit");
+    document.getElementById("SubmitButton").disabled = false;
     return false;
   }
 }
