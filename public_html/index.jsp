@@ -66,7 +66,7 @@
                 </p>
                 <p>
                     You can review your selections by clicking the 
-                    <strong>&ldquo;Confirm Request&rdquo;</strong>
+                    <strong>&ldquo;Submit Request&rdquo;</strong>
                      button.
                 </p>
             </section>
