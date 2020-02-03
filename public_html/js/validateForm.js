@@ -1,4 +1,5 @@
 function validateForm(formObj) {
+  const MAX_ITEMS = 20;
   var customDate = 0;
   var selectedDate = 0;
   var pattern = /\d{2}\/\d{2}\/\d{4}/;
@@ -19,8 +20,8 @@ function validateForm(formObj) {
     return false;
   }
 
-  if (itemCount > 5) {
-    alert("Please select at most five items to view/duplicate");
+  if (itemCount > MAX_ITEMS) {
+    alert("Please select at most " + MAX_ITEMS + " items to view/duplicate");
     document.getElementById("SubmitButton").disabled = false;
     return false;
   }
