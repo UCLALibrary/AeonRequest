@@ -239,7 +239,7 @@
                                 <br/>
                                 <div class="input-row">
                                     <span>
-                                        <input type="radio" name="Format" id="format.1" value="AV"/><label>Audio /
+                                        <input type="radio" name="Format" id="format.1" value="Audio/Video"/><label>Audio /
                                                                                                              Video</label></span>
                                      
                                     <span>
