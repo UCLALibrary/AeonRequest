@@ -62,8 +62,16 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	   <input type="hidden" name="Format" value="${param.Format}" />
 	   <input type="hidden" name="ForPublication" value="${param.ForPublication}" />
 	   <input type="hidden" name="ItemInfo3" value="${param.ItemInfo3}" />
-	   <input value="Copy" name="RequestType" id="RequestType" type="hidden" disabled="true" />
-	   <input type="hidden" name="SkipOrderEstimate" id="SkipOrderEstimate" value="Yes" disabled="true" />
+           <c:choose>
+             <c:when test="${param.reqType eq 2}">
+               <input value="Copy" name="RequestType" id="RequestType" type="hidden" />
+               <input type="hidden" name="SkipOrderEstimate" id="SkipOrderEstimate" value="Yes" />
+             </c:when>
+             <c:otherwise>
+               <input value="Copy" name="RequestType" id="RequestType" type="hidden" disabled="true" />
+               <input type="hidden" name="SkipOrderEstimate" id="SkipOrderEstimate" value="Yes" disabled="true" />
+             </c:otherwise>
+           </c:choose>
 	   <c:choose>
 			<c:when test="${not empty bibRecord.srlfItems}">
 				<c:set var="index" value="-1" />
