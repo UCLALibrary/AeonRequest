@@ -1,6 +1,6 @@
 package edu.ucla.library.libservices.aeon.vger.servlets;
 
-import edu.ucla.library.libservices.aeon.vger.db.source.DataSourceFactory;
+//import edu.ucla.library.libservices.aeon.vger.db.source.DataSourceFactory;
 
 import java.io.IOException;
 
@@ -10,17 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javax.sql.DataSource;
+//import javax.sql.DataSource;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+//import org.springframework.jdbc.core.JdbcTemplate;
 
 public class OacLinker
   extends HttpServlet
 {
-  private static final String COUNT_QUERY =
+  @SuppressWarnings("compatibility:-3030590753088951300")
+  private static final long serialVersionUID = -8471856359218498556L;
+  /*private static final String COUNT_QUERY =
     "SELECT count(record_id) FROM ucladb.elink_index WHERE link like '%' || ? || '%'";
   private static final String ID_QUERY =
-    "SELECT record_id FROM ucladb.elink_index WHERE link like '%' || ? || '%'";
+    "SELECT record_id FROM ucladb.elink_index WHERE link like '%' || ? || '%'";*/
 
   public void init( ServletConfig config )
     throws ServletException
@@ -32,7 +34,8 @@ public class OacLinker
                      HttpServletResponse response )
     throws ServletException, IOException
   {
-    String arkID;
+    response.sendRedirect( "https://ucla.libanswers.com/lsc/faq/383029" );
+    /*String arkID;
 
     arkID = null;
     try
@@ -80,7 +83,7 @@ public class OacLinker
     }
     else
       response.sendError( response.SC_BAD_REQUEST,
-                          "Request missing OAC ARK ID" );
+                          "Request missing OAC ARK ID" );*/
 
   }
 }
